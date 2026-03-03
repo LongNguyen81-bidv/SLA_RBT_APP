@@ -1,9 +1,11 @@
 import {useState, useMemo} from 'react';
+import { Routes, Route } from 'react-router-dom';
 import AppHeader from './components/AppHeader';
 import Dashboard from './pages/Dashboard';
 import LoansTab from './pages/LoansTab';
 import StaffPerf from './pages/StaffPerf';
 import ConfigTab from './pages/ConfigTab';
+import NotFound from './pages/NotFound';
 import {
     SLA_STEPS,
     TOTAL_INTERNAL_HOURS,
@@ -14,7 +16,6 @@ import {
 import {getSLAStatus} from './utils/helpers';
 
 export default function App() {
-    const [activeTab, setActiveTab] = useState('dashboard');
     const [selectedLoan, setSelectedLoan] = useState(0);
 
     const loans = MOCK_LOANS;
@@ -31,34 +32,42 @@ export default function App() {
         return(Math.round((allProgress.reduce((sum, prog) => sum + prog.filter((p) => p.completed).length, 0) / loans.length) * 10) / 10);
     }, [loans, allProgress]);
 
-    return (<div className="min-h-screen bg-surface-100 text-[#1a3329] font-sans">
-        <AppHeader activeTab={activeTab}
-            setActiveTab={setActiveTab}/>
+    return (
+        <div className="min-h-screen bg-surface-100 text-[#1a3329] font-sans">
+            <AppHeader />
 
-        <div className="px-4 sm:px-6 md:px-8 py-6 max-w-[1400px] mx-auto"> {
-            activeTab === 'dashboard' && (<Dashboard loans={loans}
-                allProgress={allProgress}
-                SLA_STEPS={SLA_STEPS}
-                totalActive={totalActive}
-                totalExceeded={totalExceeded}
-                avgCompletion={avgCompletion}
-                setSelectedLoan={setSelectedLoan}
-                setActiveTab={setActiveTab}/>)
-        }
-            {
-            activeTab === 'loans' && (<LoansTab loans={loans}
-                allProgress={allProgress}
-                SLA_STEPS={SLA_STEPS}
-                TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
-                selectedLoan={selectedLoan}
-                setSelectedLoan={setSelectedLoan}/>)
-        }
-            {
-            activeTab === 'staff' && <StaffPerf STAFF_PERF={STAFF_PERF}/>
-        }
-            {
-            activeTab === 'config' && (<ConfigTab SLA_STEPS={SLA_STEPS}
-                TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}/>)
-        } </div>
-    </div>);
+            <div className="px-4 sm:px-6 md:px-8 py-6 max-w-[1400px] mx-auto">
+                <Routes>
+                    <Route path="/" element={
+                        <Dashboard loans={loans}
+                            allProgress={allProgress}
+                            SLA_STEPS={SLA_STEPS}
+                            totalActive={totalActive}
+                            totalExceeded={totalExceeded}
+                            avgCompletion={avgCompletion}
+                            setSelectedLoan={setSelectedLoan}/>
+                    } />
+                    <Route path="/loans" element={
+                        <LoansTab loans={loans}
+                            allProgress={allProgress}
+                            SLA_STEPS={SLA_STEPS}
+                            TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
+                            selectedLoan={selectedLoan}
+                            setSelectedLoan={setSelectedLoan}/>
+                    } />
+                    <Route path="/loans/:id" element={
+                        <LoansTab loans={loans}
+                            allProgress={allProgress}
+                            SLA_STEPS={SLA_STEPS}
+                            TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
+                            selectedLoan={selectedLoan}
+                            setSelectedLoan={setSelectedLoan}/>
+                    } />
+                    <Route path="/staff" element={<StaffPerf STAFF_PERF={STAFF_PERF}/>} />
+                    <Route path="/config" element={<ConfigTab SLA_STEPS={SLA_STEPS} TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS} />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </div>
+        </div>
+    );
 }

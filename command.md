@@ -37,10 +37,10 @@ npm run lint:fix
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
 | Refactor cấu trúc | ✅ Hoàn tất | Tách App.js → components/pages/utils/constants |
-| Tailwind CSS config | ✅ Đã cài | Chưa thực sự sử dụng, 100% inline CSS |
-| BIDV Light Theme | ⚠️ Một phần | Config colors OK, chưa áp dụng Tailwind classes |
-| Responsive Design | ❌ Chưa làm | Desktop only |
-| React Router | ❌ Chưa làm | Dùng useState cho navigation |
+| Tailwind CSS config | ✅ Hoàn tất | 100% Tailwind CSS classes |
+| BIDV Light Theme | ✅ Hoàn tất | Đã áp dụng toàn bộ app |
+| Responsive Design | ✅ Hoàn tất | Áp dụng đầy đủ md: lg: |
+| React Router | ✅ Hoàn tất | Sử dụng react-router-dom |
 | API Integration | ❌ Chưa làm | 100% mock data |
 | TypeScript | ❌ Chưa làm | JavaScript thuần |
 | Testing | ❌ Test lỗi | App.test.js tìm "learn react" - sẽ fail |
@@ -55,8 +55,8 @@ npm run lint:fix
 
 | # | File | Dòng | Mô tả | Trạng thái |
 |---|---|---|---|---|
-| 1 | `ConfigTab.js` | 12 | `color: '#f1f5f9'` (trắng trên nền trắng, residue dark theme) | ❌ Chưa fix |
-| 2 | `App.test.js` | 6 | Test tìm "learn react" — sẽ fail | ❌ Chưa fix |
+| 1 | `ConfigTab.js` | N/A | Lỗi đã được fix trong quá trình refactor (Mất `color: '#f1f5f9'`) | ✅ Đã fix |
+| 2 | `App.test.js` | N/A | Lỗi đã được fix, Test Pass | ✅ Đã fix |
 | 3 | `LoanCardComp.js` | 4 | Import trực tiếp `SLA_STEPS` thay vì nhận qua props | ⚠️ Code smell |
 
 ---
@@ -67,31 +67,31 @@ npm run lint:fix
 > Ưu tiên: 🔴 Cao nhất  
 > Dự kiến: 2-3 ngày
 
-- [ ] Fix bug `ConfigTab.js` màu text
-- [ ] Fix `App.test.js` (viết lại test cơ bản)
-- [ ] Chuyển `StatusBadge.js` sang Tailwind
-- [ ] Chuyển `SLABar.js` sang Tailwind
-- [ ] Chuyển `MetricCard.js` sang Tailwind
-- [ ] Chuyển `StepCard.js` sang Tailwind
-- [ ] Chuyển `LoanCardComp.js` sang Tailwind
-- [ ] Chuyển `AppHeader.js` sang Tailwind
-- [ ] Chuyển `LoanDetailPanel.js` sang Tailwind
-- [ ] Chuyển `SLAStepsTable.js` sang Tailwind
-- [ ] Chuyển `SLAConfigPanel.js` sang Tailwind
-- [ ] Chuyển tất cả Pages sang Tailwind
-- [ ] Chuyển `App.js` sang Tailwind
-- [ ] Thêm responsive breakpoints (mobile/tablet/desktop)
-- [ ] Kiểm tra build: `npm run build`
+- [x] Fix bug `ConfigTab.js` màu text
+- [x] Fix `App.test.js` (viết lại test cơ bản)
+- [x] Chuyển `StatusBadge.js` sang Tailwind
+- [x] Chuyển `SLABar.js` sang Tailwind
+- [x] Chuyển `MetricCard.js` sang Tailwind
+- [x] Chuyển `StepCard.js` sang Tailwind
+- [x] Chuyển `LoanCardComp.js` sang Tailwind
+- [x] Chuyển `AppHeader.js` sang Tailwind
+- [x] Chuyển `LoanDetailPanel.js` sang Tailwind
+- [x] Chuyển `SLAStepsTable.js` sang Tailwind
+- [x] Chuyển `SLAConfigPanel.js` sang Tailwind
+- [x] Chuyển tất cả Pages sang Tailwind
+- [x] Chuyển `App.js` sang Tailwind
+- [x] Thêm responsive breakpoints (mobile/tablet/desktop)
+- [x] Kiểm tra build: `npm run build`
 
 ### Sprint 2: React Router & Navigation
 > Ưu tiên: 🟡 Trung bình  
 > Dự kiến: 1 ngày
 
-- [ ] Cài `react-router-dom`
-- [ ] Tạo routes: `/`, `/loans`, `/loans/:id`, `/staff`, `/config`
-- [ ] Chuyển `AppHeader` buttons → `NavLink`
-- [ ] Thêm 404 page
-- [ ] Test routing
+- [x] Cài `react-router-dom`
+- [x] Tạo routes: `/`, `/loans`, `/loans/:id`, `/staff`, `/config`
+- [x] Chuyển `AppHeader` buttons → `NavLink`
+- [x] Thêm 404 page
+- [x] Test routing
 
 ### Sprint 3: API Layer & React Query
 > Ưu tiên: 🟡 Trung bình  
@@ -166,3 +166,5 @@ sla-rbt-app/
 |---|---|
 | 2026-03-03 | Refactor xong cấu trúc thư mục, setup Tailwind config, chuyển sang light theme |
 | 2026-03-03 | Đánh giá chi tiết: Tailwind chưa được sử dụng thực tế, cần chuyển đổi inline CSS |
+| 2026-03-03 | ✅ Hoàn thành **Sprint 2**, tích hợp thành công `react-router-dom` cho việc điều hướng và tạo trang `NotFound`. |
+| 2026-03-03 | ✅ Hoàn thành **Sprint 1**, rà soát việc chuyển đổi sang Tailwind, fix bug giao diện và test thành công (`npm run test` & `npm run build`). |
