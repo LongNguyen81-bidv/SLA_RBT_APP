@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global reset — handled by Tailwind's preflight, kept for reference */
+@layer base {
+  body {
+    @apply bg-dark-900 font-sans antialiased;
+  }
+
+  code {
+    @apply font-mono;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
