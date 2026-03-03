@@ -1,188 +1,81 @@
 import React from 'react';
 import StatusBadge from '../components/StatusBadge';
 
-export default function StaffPerf({ STAFF_PERF }) {
-  return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <div
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: '#f1f5f9',
-            marginBottom: 4,
-          }}
-        >
-          Hiệu suất Cán bộ
+export default function StaffPerf({STAFF_PERF}) {
+    return (<div>
+        <div className="mb-6">
+            <div className="text-xl font-bold text-bidv-green mb-1 font-sans">
+                Hiệu suất Cán bộ
+            </div>
+            <div className="text-xs text-[#6B9E97] font-sans">
+                Tháng 3/2025 · Đo lường dựa trên SLA từng bước
+            </div>
         </div>
-        <div
-          style={{
-            fontSize: 12,
-            color: '#475569',
-          }}
-        >
-          Tháng 3/2025 · Đo lường dựa trên SLA từng bước
-        </div>
-      </div>
 
-      <div
-        style={{
-          background: '#080d14',
-          border: '1px solid #1e293b',
-          borderRadius: 10,
-          overflow: 'hidden',
-        }}
-      >
-        <table
-          style={{
-            width: '100%',
-            borderCollapse: 'collapse',
-          }}
-        >
-          <thead>
-            <tr style={{ borderBottom: '1px solid #1e293b' }}>
-              {' '}
-              {[
-                'Cán bộ',
-                'Vai trò',
-                'Đơn vị',
-                'Số hồ sơ',
-                'TG TB (h)',
-                'Bước vượt SLA',
-                'Hiệu suất',
-              ].map((h) => (
-                <th
-                  key={h}
-                  style={{
-                    padding: '12px 16px',
-                    textAlign: 'left',
-                    fontSize: 10,
-                    color: '#475569',
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontWeight: 600,
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  {' '}
-                  {h}
-                </th>
-              ))}{' '}
-            </tr>
-          </thead>
-          <tbody>
-            {' '}
-            {STAFF_PERF.map((s, i) => {
-              const perf =
-                s.exceeded === 0
-                  ? 'Xuất sắc'
-                  : s.exceeded <= 1
-                    ? 'Tốt'
-                    : s.exceeded <= 2
-                      ? 'Trung bình'
-                      : 'Cần cải thiện';
-              return (
-                <tr key={i} style={{ borderBottom: '1px solid #0f172a' }}>
-                  <td style={{ padding: '12px 16px' }}>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: '#e2e8f0',
-                      }}
-                    >
-                      {' '}
-                      {s.name}
-                    </div>
-                  </td>
-                  <td
-                    style={{
-                      padding: '12px 16px',
-                      fontSize: 12,
-                      color: '#64748b',
-                    }}
-                  >
-                    {' '}
-                    {s.role}
-                  </td>
-                  <td
-                    style={{
-                      padding: '12px 16px',
-                      fontSize: 11,
-                      color: '#475569',
-                    }}
-                  >
-                    {' '}
-                    {s.dept}
-                  </td>
-                  <td
-                    style={{
-                      padding: '12px 16px',
-                      fontFamily: "'IBM Plex Mono', monospace",
-                      fontSize: 12,
-                      color: '#94a3b8',
-                    }}
-                  >
-                    {' '}
-                    {s.loans}
-                  </td>
-                  <td style={{ padding: '12px 16px' }}>
-                    <span
-                      style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
-                        fontSize: 12,
-                        color: s.avgHours > 3 ? '#f59e0b' : '#94a3b8',
-                      }}
-                    >
-                      {' '}
-                      {s.avgHours}h
-                    </span>
-                  </td>
-                  <td style={{ padding: '12px 16px' }}>
-                    {' '}
-                    {s.exceeded > 0 ? (
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: '#ef4444',
-                          fontFamily: "'IBM Plex Mono', monospace",
-                        }}
-                      >
-                        {' '}
-                        {s.exceeded}
-                        bước
-                      </span>
-                    ) : (
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: '#22c55e',
-                          fontFamily: "'IBM Plex Mono', monospace",
-                        }}
-                      >
-                        Không có
-                      </span>
-                    )}{' '}
-                  </td>
-                  <td style={{ padding: '12px 16px' }}>
-                    <StatusBadge
-                      status={
-                        s.exceeded === 0
-                          ? 'ok'
-                          : s.exceeded <= 1
-                            ? 'ok'
-                            : s.exceeded <= 2
-                              ? 'warning'
-                              : 'exceeded'
-                      }
-                      label={perf}
-                    />
-                  </td>
-                </tr>
-              );
-            })}{' '}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+        <div className="bg-white border border-[#C5DED9] rounded-[10px] shadow-sm overflow-x-auto">
+            <table className="w-full border-collapse min-w-[700px]">
+                <thead>
+                    <tr className="border-b border-bidv-green-tint bg-bidv-green-surface"> {
+                        [
+                            'Cán bộ',
+                            'Vai trò',
+                            'Đơn vị',
+                            'Số hồ sơ',
+                            'TG TB (h)',
+                            'Bước vượt SLA',
+                            'Hiệu suất',
+                        ].map((h) => (<th key={h}
+                            className="px-4 py-3 text-left text-[10px] text-[#6B9E97] font-mono font-semibold tracking-wider"> {h} </th>))
+                    } </tr>
+                </thead>
+                <tbody> {
+                    STAFF_PERF.map((s, i) => {
+                        const perf = s.exceeded === 0 ? 'Xuất sắc' : s.exceeded <= 1 ? 'Tốt' : s.exceeded <= 2 ? 'Trung bình' : 'Cần cải thiện';
+                        return (<tr key={i}
+                            className="border-b border-[#E8F5F3] hover:bg-surface-50 transition-colors">
+                            <td className="px-4 py-3">
+                                <div className="text-[13px] font-semibold text-[#1a3329] font-sans"> {
+                                    s.name
+                                } </div>
+                            </td>
+                            <td className="px-4 py-3 text-xs text-[#6B9E97] font-sans"> {
+                                s.role
+                            } </td>
+                            <td className="px-4 py-3 text-[11px] text-[#94B5B0] font-sans"> {
+                                s.dept
+                            } </td>
+                            <td className="px-4 py-3 font-mono text-xs text-bidv-green font-semibold"> {
+                                s.loans
+                            } </td>
+                            <td className="px-4 py-3">
+                                <span className={
+                                    `font-mono text-xs ${
+                                        s.avgHours > 3 ? 'text-amber-800 font-semibold' : 'text-[#6B9E97] font-normal'
+                                    }`
+                                }> {
+                                    s.avgHours
+                                }h
+                                </span>
+                            </td>
+                            <td className="px-4 py-3"> {
+                                s.exceeded > 0 ? (<span className="text-xs text-red-800 font-mono font-semibold"> {
+                                    s.exceeded
+                                }
+                                    bước
+                                </span>) : (<span className="text-xs text-emerald-800 font-mono font-normal">
+                                    Không có
+                                </span>)
+                            } </td>
+                            <td className="px-4 py-3">
+                                <StatusBadge status={
+                                        s.exceeded === 0 ? 'ok' : s.exceeded <= 1 ? 'ok' : s.exceeded <= 2 ? 'warning' : 'exceeded'
+                                    }
+                                    label={perf}/>
+                            </td>
+                        </tr>);
+                    })
+                } </tbody>
+            </table>
+        </div>
+    </div>);
 }

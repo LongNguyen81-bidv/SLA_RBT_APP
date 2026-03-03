@@ -1,41 +1,46 @@
 import React from 'react';
 
 const statusColors = {
-  ok: { bg: '#0d2b1d', border: '#16a34a', text: '#4ade80', dot: '#22c55e' },
-  warning: { bg: '#2d1f00', border: '#d97706', text: '#fbbf24', dot: '#f59e0b' },
-  exceeded: { bg: '#2d0d0d', border: '#dc2626', text: '#f87171', dot: '#ef4444' },
-  pending: { bg: '#1a1a2e', border: '#334155', text: '#64748b', dot: '#475569' },
+    ok: {
+        bg: 'bg-emerald-50',
+        border: 'border-emerald-300',
+        text: 'text-emerald-800',
+        dot: 'bg-emerald-500'
+    },
+    warning: {
+        bg: 'bg-amber-50',
+        border: 'border-amber-300',
+        text: 'text-amber-800',
+        dot: 'bg-amber-500'
+    },
+    exceeded: {
+        bg: 'bg-red-50',
+        border: 'border-red-300',
+        text: 'text-red-800',
+        dot: 'bg-red-500'
+    },
+    pending: {
+        bg: 'bg-gray-50',
+        border: 'border-gray-300',
+        text: 'text-gray-500',
+        dot: 'bg-gray-400'
+    }
 };
 
-export default function StatusBadge({ status, label }) {
-  const c = statusColors[status];
-  return (
-    <span
-      style={{
-        background: c.bg,
-        border: `1px solid ${c.border}`,
-        color: c.text,
-        padding: '2px 10px',
-        borderRadius: 4,
-        fontSize: 11,
-        fontFamily: "'IBM Plex Mono', monospace",
-        fontWeight: 600,
-        letterSpacing: '0.05em',
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-      }}
-    >
-      <span
-        style={{
-          width: 6,
-          height: 6,
-          borderRadius: '50%',
-          background: c.dot,
-          display: 'inline-block',
-        }}
-      />
-      {label}
-    </span>
-  );
+export default function StatusBadge({status, label}) {
+    const c = statusColors[status];
+    return (<span className={
+        `${
+            c.bg
+        } border ${
+            c.border
+        } ${
+            c.text
+        } px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold tracking-wider inline-flex items-center gap-1.5`
+    }>
+        <span className={
+            `w-1.5 h-1.5 rounded-full ${
+                c.dot
+            } inline-block`
+        }/> {label} </span>);
 }

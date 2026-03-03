@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global reset — handled by Tailwind's preflight, kept for reference */
+/* Global styles — BIDV Light Theme */
 @layer base {
   body {
-    @apply bg-dark-900 font-sans antialiased;
+    @apply bg-surface-100 font-sans antialiased;
   }
 
   code {

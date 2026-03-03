@@ -1,117 +1,68 @@
 import React from 'react';
-import { getSLAStatus, formatHours } from '../utils/helpers';
+import {getSLAStatus, formatHours} from '../utils/helpers';
 import StatusBadge from './StatusBadge';
 import SLABar from './SLABar';
 
-export default function StepCard({ step, progress, isActive }) {
-  const status = progress.completed
-    ? getSLAStatus(progress.actualHours, step.slaHours)
-    : isActive
-      ? 'warning'
-      : 'pending';
+export default function StepCard({step, progress, isActive}) {
+    const status = progress.completed ? getSLAStatus(progress.actualHours, step.slaHours) : isActive ? 'warning' : 'pending';
 
-  const statusLabel = {
-    ok: 'Đúng hạn',
-    warning: 'Cần chú ý',
-    exceeded: 'Vượt SLA',
-    pending: 'Chờ xử lý',
-  }[status];
+    const statusLabel = {
+        ok: 'Đúng hạn',
+        warning: 'Cần chú ý',
+        exceeded: 'Vượt SLA',
+        pending: 'Chờ xử lý'
+    }[status];
 
-  return (
-    <div
-      style={{
-        padding: '14px 16px',
-        borderRadius: 8,
-        background: isActive ? '#0f172a' : '#080d14',
-        border: `1px solid ${isActive ? '#334155' : '#1e293b'}`,
-        transition: 'all 0.3s',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: 8,
-        }}
-      >
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <span
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: 10,
-              color: '#475569',
-              background: '#0f172a',
-              border: '1px solid #1e293b',
-              padding: '2px 7px',
-              borderRadius: 3,
-            }}
-          >
-            {step.code}
-          </span>
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 500,
-              color: '#e2e8f0',
-              fontFamily: "'Be Vietnam Pro', sans-serif",
-            }}
-          >
-            {step.name}
-          </span>
+    return (<div className={
+        `px-4 py-3.5 rounded-lg border transition-all duration-300 ${
+            isActive ? 'bg-[#FFFDF0] border-bidv-gold shadow-[0_0_0_1px_rgba(201,168,76,0.2)]' : 'bg-white border-[#C5DED9] shadow-[0_1px_2px_rgba(0,77,64,0.04)]'
+        }`
+    }> {/* Header: code + name + badge */}
+        <div className="flex justify-between items-start mb-2">
+            <div className="flex gap-2.5 items-center">
+                <span className="font-mono text-[10px] text-[#6B9E97] bg-bidv-green-tint border border-[#C5DED9] px-[7px] py-0.5 rounded"> {
+                    step.code
+                } </span>
+                <span className="text-[13px] font-medium text-[#1a3329] font-sans"> {
+                    step.name
+                } </span>
+            </div>
+            <StatusBadge status={status}
+                label={statusLabel}/>
         </div>
-        <StatusBadge status={status} label={statusLabel} />
-      </div>
 
-      <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 8 }}>
-        <span
-          style={{ fontSize: 11, color: '#64748b', fontFamily: "'Be Vietnam Pro', sans-serif" }}
-        >
-          {step.owner}
-        </span>
-        <span
-          style={{
-            fontSize: 10,
-            color: step.system === 'RLOS' ? '#818cf8' : '#94a3b8',
-            fontFamily: "'IBM Plex Mono', monospace",
-            background: step.system === 'RLOS' ? '#1e1b4b' : '#111827',
-            padding: '1px 6px',
-            borderRadius: 3,
-            border: `1px solid ${step.system === 'RLOS' ? '#3730a3' : '#1e293b'}`,
-          }}
-        >
-          {step.system}
-        </span>
-        {!step.internal && (
-          <span
-            style={{
-              fontSize: 10,
-              color: '#78716c',
-              fontFamily: "'IBM Plex Mono', monospace",
-              background: '#1c1917',
-              padding: '1px 6px',
-              borderRadius: 3,
-              border: '1px solid #292524',
-            }}
-          >
-            Ngoài NH
-          </span>
-        )}
-      </div>
+        {/* Meta row: owner + system + external */}
+        <div className="flex gap-4 items-center mb-2">
+            <span className="text-[11px] text-[#6B9E97] font-sans"> {
+                step.owner
+            } </span>
+            <span className={
+                `text-[10px] font-mono px-1.5 py-px rounded border ${
+                    step.system === 'RLOS' ? 'text-bidv-green bg-bidv-green-tint border-[#80CBC4] font-semibold' : 'text-[#6B9E97] bg-bidv-green-surface border-[#C5DED9] font-normal'
+                }`
+            }> {
+                step.system
+            } </span>
+            {
+            !step.internal && (<span className="text-[10px] text-bidv-gold font-mono bg-[#FFFBEE] px-1.5 py-px rounded border border-[#E8D5A0]">
+                Ngoài NH
+            </span>)
+        } </div>
 
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <SLABar actual={progress.actualHours} sla={step.slaHours} />
-        <span
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 11,
-            color: '#94a3b8',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {formatHours(progress.actualHours)} / {formatHours(step.slaHours)}
-        </span>
-      </div>
-    </div>
-  );
+        {/* SLA Progress bar */}
+        <div className="flex gap-2 items-center">
+            <SLABar actual={
+                    progress.actualHours
+                }
+                sla={
+                    step.slaHours
+                }/>
+            <span className="font-mono text-[11px] text-[#6B9E97] whitespace-nowrap"> {
+                formatHours(progress.actualHours)
+            }
+                / {
+                formatHours(step.slaHours)
+            } </span>
+        </div>
+    </div>);
 }

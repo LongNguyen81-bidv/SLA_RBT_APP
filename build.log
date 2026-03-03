@@ -1,0 +1,29 @@
+
+> sla-rbt-app@0.1.0 build
+> react-scripts build
+
+(node:11808) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Creating an optimized production build...
+Failed to compile.
+
+Error: Parse Error: < !DOCTYPE html > <html lang="en"> < head > <meta charset=  "utf-8" /> < link rel = "icon" href = "/favicon.ico" /> <meta name="viewport"   content="width=device-width, initial-scale=1" /> < meta name = "theme-color" c  ontent = "#000000" /> <meta
+        name="description"
+        content="SLA Tracker — Theo dõi tiến độ và SLA quy trình tín dụng bán lẻ   (RBT)"
+      /> < link rel = "apple-touch-icon" href = "/logo192.png" /> <link rel="man  ifest" href="/manifest.json" /> < link rel = "preconnect" href = "https://font  s.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" c  rossorigin /> < link href = "https://fonts.googleapis.com/css2?family=IBM+Plex  +Mono:wght@400;500;600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=  swap" rel = "stylesheet" /> <title> SLA Tracker | RBT Credit < /title>
+    <script defer src="/static/js/main.dd846b1c.js"></script><link href="/static  /css/main.3fd0c2ac.css" rel="stylesheet"></head > <body> < noscript > You need   to enable JavaScript to run this app.</noscript>
+  <div id="root"></div></body> < /html>
+  
+  - htmlparser.js:255 HTMLParser.parse
+    [sla-rbt-app]/[html-minifier-terser]/src/htmlparser.js:255:15
+  
+  - task_queues:103 process.processTicksAndRejections
+    node:internal/process/task_queues:103:5
+  
+  - htmlminifier.js:1282 async minify
+    [sla-rbt-app]/[html-minifier-terser]/src/htmlminifier.js:1282:3
+  
+  - htmlminifier.js:1365 async exports.minify
+    [sla-rbt-app]/[html-minifier-terser]/src/htmlminifier.js:1365:16
+
+

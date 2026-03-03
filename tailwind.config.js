@@ -6,10 +6,21 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                dark: {
-                    900: '#030712',
-                    800: '#0f172a',
-                    700: '#1e293b'
+                bidv: {
+                    green: '#004D40',
+                    'green-dark': '#003329',
+                    'green-mid': '#00695C',
+                    'green-light': '#00897B',
+                    'green-tint': '#E0F2F1',
+                    'green-surface': '#F1FAF9',
+                    gold: '#C9A84C',
+                    'gold-light': '#E8C97A',
+                    'gold-dark': '#A8862E'
+                },
+                surface: {
+                    50: '#F8FFFE',
+                    100: '#F1F8F5',
+                    200: '#E0F0EC'
                 }
             },
             fontFamily: {

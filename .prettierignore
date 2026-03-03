@@ -1,3 +1,2 @@
-node_modules
-build
-coverage
+public/index.html
+src/components/SLABar.js
