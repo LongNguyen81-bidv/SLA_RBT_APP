@@ -41,7 +41,7 @@ npm run lint:fix
 | BIDV Light Theme | ✅ Hoàn tất | Đã áp dụng toàn bộ app |
 | Responsive Design | ✅ Hoàn tất | Áp dụng đầy đủ md: lg: |
 | React Router | ✅ Hoàn tất | Sử dụng react-router-dom |
-| API Integration | ❌ Chưa làm | 100% mock data |
+| API Integration | ✅ Hoàn tất | Tích hợp React Query với mock API service |
 | TypeScript | ❌ Chưa làm | JavaScript thuần |
 | Testing | ❌ Test lỗi | App.test.js tìm "learn react" - sẽ fail |
 | CI/CD | ❌ Chưa có | Chưa setup GitHub Actions |
@@ -63,7 +63,7 @@ npm run lint:fix
 
 ## 🗺️ Roadmap — Các Sprint tiếp theo
 
-### Sprint 1: Chuyển đổi Tailwind CSS & Fix Bugs ⬅️ TIẾP THEO
+### Sprint 1: Chuyển đổi Tailwind CSS & Fix Bugs
 > Ưu tiên: 🔴 Cao nhất  
 > Dự kiến: 2-3 ngày
 
@@ -97,13 +97,13 @@ npm run lint:fix
 > Ưu tiên: 🟡 Trung bình  
 > Dự kiến: 2-3 ngày
 
-- [ ] Cài `@tanstack/react-query` + `axios`
-- [ ] Tạo `src/services/api.js`
-- [ ] Tạo custom hooks: `useLoans`, `useSLAConfig`, `useStaffPerf`
-- [ ] Thêm loading/error states vào UI
-- [ ] Giữ lại mock data làm fallback
+- [x] Cài `@tanstack/react-query` + `axios`
+- [x] Tạo `src/services/api.js`
+- [x] Tạo custom hooks: `useLoans`, `useSLAConfig`, `useStaffPerf`
+- [x] Thêm loading/error states vào UI
+- [x] Giữ lại mock data làm fallback
 
-### Sprint 4: TypeScript Migration (Tùy chọn)
+### Sprint 4: TypeScript Migration (Tùy chọn) ⬅️ TIẾP THEO
 > Ưu tiên: 🟢 Thấp  
 > Dự kiến: 2 ngày
 
@@ -168,3 +168,4 @@ sla-rbt-app/
 | 2026-03-03 | Đánh giá chi tiết: Tailwind chưa được sử dụng thực tế, cần chuyển đổi inline CSS |
 | 2026-03-03 | ✅ Hoàn thành **Sprint 2**, tích hợp thành công `react-router-dom` cho việc điều hướng và tạo trang `NotFound`. |
 | 2026-03-03 | ✅ Hoàn thành **Sprint 1**, rà soát việc chuyển đổi sang Tailwind, fix bug giao diện và test thành công (`npm run test` & `npm run build`). |
+| 2026-03-03 | ✅ Hoàn thành **Sprint 3**, tích hợp React Query, tạo API hooks và loading states. |

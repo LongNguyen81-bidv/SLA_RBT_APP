@@ -1,0 +1,28 @@
+﻿
+> sla-rbt-app@0.1.0 build
+> react-scripts build
+
+node.exe : (node:24468) [DEP0176] 
+DeprecationWarning: fs.F_OK is 
+deprecated, use fs.constants.F_OK instead
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: ((node:24468) [D...ts.F_OK instead  
+  :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+(Use `node --trace-deprecation ...` to 
+show where the warning was created)
+Creating an optimized production build...
+Failed to compile.
+
+[eslint] 
+src\App.js
+Syntax error: Unexpected token (62:44) (62:44)
+
+
