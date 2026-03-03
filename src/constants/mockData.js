@@ -2,8 +2,8 @@ export const SLA_STEPS = [
   {
     id: 1,
     code: 'S01',
-    name: 'Đề xuất tín dụng',
-    owner: 'CB QLKH',
+    name: 'Khởi tạo & Tiếp nhận hồ sơ',
+    owner: 'QHKH',
     slaHours: 2,
     system: 'RLOS',
     internal: true,
@@ -11,8 +11,8 @@ export const SLA_STEPS = [
   {
     id: 2,
     code: 'S02',
-    name: 'Định giá TSBĐ',
-    owner: 'QLKH / Tổ ĐG / QLRR',
+    name: 'Định giá Tài sản bảo đảm',
+    owner: 'Định giá TS',
     slaHours: 8,
     system: 'Thủ công',
     internal: false,
@@ -20,78 +20,84 @@ export const SLA_STEPS = [
   {
     id: 3,
     code: 'S03',
-    name: 'Lập & Phê duyệt Báo cáo định giá',
-    owner: 'Thành viên ĐG + Thẩm quyền',
-    slaHours: 1,
-    system: 'Thủ công',
+    name: 'Thẩm định tín dụng',
+    owner: 'Thẩm định',
+    slaHours: 4,
+    system: 'RLOS',
     internal: true,
   },
   {
     id: 4,
     code: 'S04',
-    name: 'Thẩm định tín dụng',
-    owner: 'CB Thẩm định (QLRR)',
-    slaHours: 3,
+    name: 'Phê duyệt tín dụng',
+    owner: 'Phê duyệt',
+    slaHours: 2,
     system: 'RLOS',
     internal: true,
   },
   {
     id: 5,
     code: 'S05',
-    name: 'Phê duyệt tín dụng tại Chi nhánh',
-    owner: 'Cấp thẩm quyền',
-    slaHours: 0.5,
-    system: 'RLOS',
-    internal: true,
-  },
-  {
-    id: 6,
-    code: 'S06',
-    name: 'Hoàn thiện HĐ, ký kết, scan & lưu RLOS',
-    owner: 'CB QTTD',
+    name: 'Hỗ trợ tín dụng (Giải ngân)',
+    owner: 'HTTD',
     slaHours: 5,
     system: 'RLOS',
     internal: true,
   },
-  {
-    id: 7,
-    code: 'S07',
-    name: 'Nhập kho TSBĐ',
-    owner: 'CB QTTD',
-    slaHours: 0.6,
-    system: 'Thủ công',
-    internal: true,
-  },
-  {
-    id: 8,
-    code: 'S08',
-    name: 'Tác nghiệp RLOS (facility, tài khoản, thấu chi)',
-    owner: 'CB QTTD',
-    slaHours: 0.5,
-    system: 'RLOS',
-    internal: true,
-  },
-  {
-    id: 9,
-    code: 'S09',
-    name: 'Kiểm soát phê duyệt & kiểm tra TSBĐ (CLIMS)',
-    owner: 'Bộ phận QTTD',
-    slaHours: 1,
-    system: 'RLOS',
-    internal: true,
-  },
-  {
-    id: 10,
-    code: 'S10',
-    name: 'Đăng ký giao dịch bảo đảm',
-    owner: 'CB QTTD',
-    slaHours: 4,
-    system: 'Thủ công',
-    internal: false,
-  },
 ];
 
-export const TOTAL_INTERNAL_HOURS = 13.6;
+export const TOTAL_INTERNAL_HOURS = 13;
+
+export const USERS = [
+  {
+    id: 'u1',
+    username: 'admin',
+    password: '1',
+    name: 'Nguyễn Quản Lý (Admin)',
+    role: 'ADMIN',
+    dept: 'QLNB',
+  },
+  {
+    id: 'u2',
+    username: 'qhkh',
+    password: '1',
+    name: 'Trần Minh Khoa',
+    role: 'USER',
+    dept: 'QHKH',
+  },
+  {
+    id: 'u3',
+    username: 'dinhgia',
+    password: '1',
+    name: 'Đinh Thị Hoa',
+    role: 'USER',
+    dept: 'Định giá TS',
+  },
+  {
+    id: 'u4',
+    username: 'thamdinh',
+    password: '1',
+    name: 'Bùi Thị Lan',
+    role: 'USER',
+    dept: 'Thẩm định',
+  },
+  {
+    id: 'u5',
+    username: 'pheduyet',
+    password: '1',
+    name: 'Phạm Sếp',
+    role: 'USER',
+    dept: 'Phê duyệt',
+  },
+  {
+    id: 'u6',
+    username: 'httd',
+    password: '1',
+    name: 'Vũ Quang Minh',
+    role: 'USER',
+    dept: 'HTTD',
+  },
+];
 
 export const MOCK_LOANS = [
   {
@@ -101,7 +107,9 @@ export const MOCK_LOANS = [
     type: 'Mua nhà',
     branch: 'CN Hà Nội',
     officer: 'Trần Minh Khoa',
-    startTime: Date.now() - 6 * 3600000,
+    startTime: Date.now() - 4 * 3600000,
+    currentStepId: 2, // Đang ở định giá
+    assignedDept: 'Định giá TS',
   },
   {
     id: 'HS2024-002',
@@ -109,8 +117,10 @@ export const MOCK_LOANS = [
     amount: '1.2 tỷ',
     type: 'Kinh doanh BĐS',
     branch: 'CN HCM',
-    officer: 'Phạm Thùy Linh',
-    startTime: Date.now() - 14 * 3600000,
+    officer: 'Trần Minh Khoa', // Cho QHKH
+    startTime: Date.now() - 1 * 3600000,
+    currentStepId: 1, // Đang ở QHKH
+    assignedDept: 'QHKH',
   },
   {
     id: 'HS2024-003',
@@ -119,7 +129,9 @@ export const MOCK_LOANS = [
     type: 'Mở rộng kinh doanh',
     branch: 'CN Đà Nẵng',
     officer: 'Ngô Thanh Hùng',
-    startTime: Date.now() - 2 * 3600000,
+    startTime: Date.now() - 15 * 3600000,
+    currentStepId: 4, // Đang ở Phê duyệt
+    assignedDept: 'Phê duyệt',
   },
   {
     id: 'HS2024-004',
@@ -128,32 +140,37 @@ export const MOCK_LOANS = [
     type: 'Mua xe ô tô',
     branch: 'CN Hà Nội',
     officer: 'Trần Minh Khoa',
-    startTime: Date.now() - 20 * 3600000,
+    startTime: Date.now() - 25 * 3600000,
+    currentStepId: 5, // Đang ở HTTD
+    assignedDept: 'HTTD',
   },
 ];
 
-function generateStepProgress(loanIndex) {
-  const patterns = [
-    [true, true, true, true, false, false, false, false, false, false],
-    [true, true, true, true, true, true, true, true, true, false],
-    [true, true, false, false, false, false, false, false, false, false],
-    [true, true, true, true, true, true, true, true, true, true],
-  ];
-  const times = [
-    [1.8, 7.2, 2.5, 0.4, null, null, null, null, null, null],
-    [2.1, 9.5, 1.2, 3.8, 0.6, 6.1, 0.7, 0.5, 1.3, 3.8],
-    [1.5, 3.1, null, null, null, null, null, null, null, null],
-    [1.9, 7.8, 0.9, 2.7, 0.5, 4.8, 0.6, 0.5, 0.9, 4.1],
-  ];
-  return SLA_STEPS.map((step, i) => ({
-    stepId: step.id,
-    completed: patterns[loanIndex][i],
-    actualHours: times[loanIndex][i],
-    startedAt: patterns[loanIndex][i] ? Date.now() - (times[loanIndex][i] || 0) * 3600000 : null,
-  }));
+// Khởi tạo Progress ban đầu tương ứng với currentStepId
+function generateInitialProgress(loan) {
+  return SLA_STEPS.map((step) => {
+    let completed = false;
+    let actualHours = null;
+    let startedAt = null;
+
+    if (step.id < loan.currentStepId) {
+      completed = true;
+      actualHours = step.slaHours - Math.random() * 0.5; // Random hours
+      startedAt = loan.startTime + step.id * 3600000;
+    } else if (step.id === loan.currentStepId) {
+      startedAt = Date.now() - Math.random() * step.slaHours * 1000000; // Random startedAt
+    }
+
+    return {
+      stepId: step.id,
+      completed,
+      actualHours,
+      startedAt,
+    };
+  });
 }
 
-export const MOCK_PROGRESS = MOCK_LOANS.map((_, i) => generateStepProgress(i));
+export const MOCK_PROGRESS = MOCK_LOANS.map((loan) => generateInitialProgress(loan));
 
 export const STAFF_PERF = [
   {
@@ -173,7 +190,7 @@ export const STAFF_PERF = [
     dept: 'Chi nhánh HCM',
   },
   {
-    name: 'Ngô Thanh Hùng',
+    name: 'Bùi Thị Lan',
     role: 'CB Thẩm định',
     loans: 15,
     avgHours: 2.8,
@@ -181,20 +198,12 @@ export const STAFF_PERF = [
     dept: 'QLRR HN',
   },
   {
-    name: 'Bùi Thị Lan',
-    role: 'CB Thẩm định',
+    name: 'Vũ Quang Minh',
+    role: 'CB HTTD',
     loans: 10,
     avgHours: 3.5,
     exceeded: 3,
     dept: 'QLRR HCM',
-  },
-  {
-    name: 'Vũ Quang Minh',
-    role: 'CB QTTD',
-    loans: 18,
-    avgHours: 4.2,
-    exceeded: 1,
-    dept: 'Chi nhánh HN',
   },
   {
     name: 'Đinh Thị Hoa',

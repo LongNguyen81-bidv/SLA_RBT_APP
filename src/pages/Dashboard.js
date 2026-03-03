@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MetricCard from '../components/MetricCard';
 import LoanCardComp from '../components/LoanCardComp';
 import SLAStepsTable from '../components/SLAStepsTable';
+import { useAuth } from '../context/AuthContext';
 
 export default function Dashboard({
   loans,
@@ -14,16 +15,22 @@ export default function Dashboard({
   setSelectedLoan,
 }) {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   return (
     <div>
       {' '}
       {/* Header */}
       <div className="mb-6">
         <div className="text-xl font-bold text-bidv-green mb-1 font-sans">
-          Tổng quan SLA hôm nay
+          Xin chào, {user?.name}{' '}
         </div>
-        <div className="text-xs text-[#6B9E97] font-sans">
-          Cập nhật lúc {new Date().toLocaleTimeString('vi-VN')}· {loans.length} hồ sơ đang xử lý
+        <div className="text-sm font-semibold text-bidv-gold-dark mb-1 font-sans">
+          Vai trò: {user?.role === 'ADMIN' ? 'Quản lý Nội bộ (Admin)' : `Cán bộ ${user?.dept}`}{' '}
+        </div>
+        <div className="text-xs text-[#6B9E97] font-sans mt-2">
+          Cập nhật lúc {new Date().toLocaleTimeString('vi-VN')}· {loans.length}
+          hồ sơ liên quan
         </div>
       </div>
       {/* Metric cards */}

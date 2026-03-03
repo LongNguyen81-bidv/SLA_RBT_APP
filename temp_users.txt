@@ -1,0 +1,8 @@
+export const USERS = [
+  { id: 'u1', username: 'admin', password: '1', name: 'Nguyễn Quản Lý (Admin)', role: 'ADMIN', dept: 'QLNB' },
+  { id: 'u2', username: 'qhkh', password: '1', name: 'Trần Minh Khoa', role: 'USER', dept: 'QHKH' },
+  { id: 'u3', username: 'dinhgia', password: '1', name: 'Đinh Thị Hoa', role: 'USER', dept: 'Định giá TS' },
+  { id: 'u4', username: 'thamdinh', password: '1', name: 'Bùi Thị Lan', role: 'USER', dept: 'Thẩm định' },
+  { id: 'u5', username: 'pheduyet', password: '1', name: 'Phạm Sếp', role: 'USER', dept: 'Phê duyệt' },
+  { id: 'u6', username: 'httd', password: '1', name: 'Vũ Quang Minh', role: 'USER', dept: 'HTTD' },
+];
