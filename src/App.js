@@ -1,4 +1,4 @@
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import AppHeader from './components/AppHeader';
 import Dashboard from './pages/Dashboard';
@@ -18,6 +18,12 @@ import {useAuth} from './context/AuthContext';
 export default function App() {
     const {user} = useAuth();
     const [selectedLoan, setSelectedLoan] = useState(0);
+
+    const [currentTime, setCurrentTime] = useState(Date.now());
+    useEffect(() => {
+        const interval = setInterval(() => setCurrentTime(Date.now()), 60000);
+        return () => clearInterval(interval);
+    }, []);
 
     const {data: loansData, isLoading: isLoansLoading, isError: isLoansError} = useLoans(user);
     const {data: SLA_STEPS, isLoading: isConfigLoading, isError: isConfigError} = useSLAConfig();
@@ -45,7 +51,7 @@ export default function App() {
         return (<div className="min-h-screen flex items-center justify-center bg-surface-100">
             <div className="flex flex-col items-center">
                 <div className="w-10 h-10 border-4 border-bidv-green border-t-transparent rounded-full animate-spin mb-4"></div>
-                <div className="text-bidv-green font-semibold">Ðang t?i d? li?u...</div>
+                <div className="text-bidv-green font-semibold">ï¿½ang t?i d? li?u...</div>
             </div>
         </div>);
     }
@@ -54,7 +60,7 @@ export default function App() {
         return (<div className="min-h-screen flex items-center justify-center bg-surface-100">
             <div className="bg-red-50 text-red-600 p-6 rounded-lg shadow-sm border border-red-200">
                 <h3 className="text-lg font-bold mb-2">L?i k?t n?i</h3>
-                <p>Không th? t?i d? li?u t? máy ch?. Vui lòng th? l?i sau.</p>
+                <p>Khï¿½ng th? t?i d? li?u t? mï¿½y ch?. Vui lï¿½ng th? l?i sau.</p>
             </div>
         </div>);
     }

@@ -1,33 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {BrowserRouter} from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './context/AuthContext';
+import {AuthProvider} from './context/AuthContext';
+import {ConfigProvider} from './context/ConfigContext';
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-  },
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: 1
+        }
+    }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+root.render (<React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AuthProvider>
+        <AuthProvider>
+            <ConfigProvider>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </ConfigProvider>
+        </AuthProvider>
     </QueryClientProvider>
-  </React.StrictMode>
-);
+</React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
