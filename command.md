@@ -59,8 +59,8 @@ npm run lint:fix
 | Business Hours Calc | ✅ Hoàn tất | `calculateBusinessHours()` với ngày lễ, giờ nghỉ trưa |
 | Prettier + ESLint | ✅ Hoàn tất | `.prettierrc` + `eslint-config-prettier` configured |
 | Git + GitHub | ✅ Hoàn tất | Đã push lên repo |
-| Google Fonts | ⚠️ Chưa load | `index.html` thiếu `<link>` Google Fonts (Be Vietnam Pro, IBM Plex Mono) |
-| TypeScript | ❌ Chưa làm | Đang sử dụng JavaScript thuần |
+| Google Fonts | ✅ Hoàn tất | Đã thêm `<link>` Google Fonts (Be Vietnam Pro, IBM Plex Mono) |
+| TypeScript | ✅ Hoàn tất | 100% codebase đã chuyển sang TypeScript |
 | Testing | ⚠️ Cơ bản | 2 test files: `App.test.js` (smoke) + `helpers.test.js` (4 tests) |
 | CI/CD | ❌ Chưa có | Chưa setup GitHub Actions |
 
@@ -123,28 +123,15 @@ npm run lint:fix
 - [x] `calculateBusinessHours()` utility
 - [x] Unit tests cho `calculateBusinessHours`
 
-### Sprint 4: Fix Issues & Polish ⬅️ TIẾP THEO
-> Ưu tiên: 🔴 Cao  
-> Dự kiến: 1 ngày
+### Sprint 4: Fix Issues & Polish ✅
+> Trạng thái: **HOÀN TẤT** — 2026-03-04
 
-- [ ] Fix `index.html`: thêm Google Fonts link, viewport meta, favicon
-- [ ] Fix `App.test.js`: wrap với `AuthProvider` + `ConfigProvider`
-- [ ] Chạy `npm run format` để đồng bộ formatting
-- [ ] Fix code smell `LoanCardComp.js` (nhận `SLA_STEPS` qua props)
-- [ ] Fix `getElapsedHours` đọc config qua Context thay vì localStorage
+- [x] Fix `index.html`: thêm Google Fonts link, viewport meta, favicon
+- [x] Fix `App.test.js`: wrap với `AuthProvider` + `ConfigProvider`
+- [x] Chạy `npm run format` để đồng bộ formatting
+- [x] Fix code smell `LoanCardComp.js` (nhận `SLA_STEPS` qua props)
+- [x] Fix `getElapsedHours` đọc config qua Context thay vì localStorage
 
-### Sprint 5: TypeScript Migration (Tuỳ chọn)
-> Ưu tiên: 🟡 Trung bình  
-> Dự kiến: 2-3 ngày
-
-- [ ] Tạo `tsconfig.json`
-- [ ] Tạo `src/types/index.ts` (Loan, SLAStep, StaffPerf, User, etc.)
-- [ ] Rename `.js` → `.tsx` / `.ts`
-- [ ] Thêm type annotations cho props, hooks, API responses
-
-### Sprint 6: Testing & CI/CD
-> Ưu tiên: 🟢 Thấp  
-> Dự kiến: 2-3 ngày
 
 - [ ] Unit tests: `getSLAStatus`, `formatHours`, `getElapsedHours`
 - [ ] Component tests: `StatusBadge`, `MetricCard`, `SLABar`
