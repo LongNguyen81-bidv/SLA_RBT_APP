@@ -1,7 +1,7 @@
 # 📋 SLA RBT App — Command & Progress Tracker
 
 > Cập nhật: 2026-03-04  
-> Trạng thái: Hoàn tất Sprint 1–3, đang chuẩn bị Sprint 4–5
+> Trạng thái: Hoàn tất Sprint 1–5, đang chuẩn bị Sprint 6 (Testing & CI/CD)
 
 ---
 
@@ -70,14 +70,10 @@ npm run lint:fix
 
 | # | File | Mô tả | Mức độ |
 |---|---|---|---|
-| 1 | `index.html` | File bị minified 1 dòng, thiếu `<link>` Google Fonts → font fallback | 🟡 Trung bình |
-| 2 | `index.html` | Thiếu `<meta viewport>`, `<meta description>`, favicon → SEO & responsive kém | 🟡 Trung bình |
-| 3 | `LoanCardComp.js` | Import trực tiếp `SLA_STEPS` thay vì nhận qua props | 🟢 Code smell |
-| 4 | `App.test.js` | Thiếu wrap `AuthProvider` + `ConfigProvider` → test sẽ fail nếu refactor | 🟡 Trung bình |
-| 5 | `mockData.js` | SLA_STEPS chỉ có 5 bước (mock), thực tế quy trình BIDV có 10 bước | 🟢 Known |
-| 6 | `api.js` | `USE_MOCK = true` hardcode, chưa có real API endpoint | 🟢 Known |
-| 7 | `helpers.js` | `getElapsedHours()` đọc config từ `localStorage` trực tiếp thay vì qua Context | 🟢 Code smell |
-| 8 | Formatter | Một số file có formatting không nhất quán (dấu `;`, spacing) | 🟢 Nhẹ |
+| 1 | `mockData.ts` | SLA_STEPS chỉ có 5 bước (mock), thực tế quy trình BIDV có 10 bước | 🟢 Known |
+| 2 | `api.ts` | `USE_MOCK = true` hardcode, chưa có real API endpoint | 🟢 Known |
+| 3 | Testing | Thiếu Unit tests cho các components chính và custom hooks | � Trung bình |
+| 4 | CI/CD | Chưa setup GitHub Actions pipeline cho Lint & Test trước khi merge | � Trung bình |
 
 ---
 
@@ -127,13 +123,24 @@ npm run lint:fix
 > Trạng thái: **HOÀN TẤT** — 2026-03-04
 
 - [x] Fix `index.html`: thêm Google Fonts link, viewport meta, favicon
-- [x] Fix `App.test.js`: wrap với `AuthProvider` + `ConfigProvider`
+- [x] Fix `App.test.tsx`: wrap với `AuthProvider` + `ConfigProvider`
 - [x] Chạy `npm run format` để đồng bộ formatting
-- [x] Fix code smell `LoanCardComp.js` (nhận `SLA_STEPS` qua props)
+- [x] Fix code smell `LoanCardComp.tsx` (nhận `SLA_STEPS` qua props)
 - [x] Fix `getElapsedHours` đọc config qua Context thay vì localStorage
 
+### Sprint 5: TypeScript Migration ✅
+> Trạng thái: **HOÀN TẤT** — 2026-03-04
 
-- [ ] Unit tests: `getSLAStatus`, `formatHours`, `getElapsedHours`
+- [x] Đổi đuôi file source từ `.js` sang `.ts` / `.tsx`
+- [x] Định nghĩa Types/Interfaces: `Loan`, `SLAConfig`, `StaffPerf`, `User`
+- [x] Fix các lỗi Type check của TypeScript (`any`, implicit types)
+- [x] Cập nhật command và cấu trúc testing tương thích TypeScript
+- [x] Xác nhận npm test và npm run build hoạt động trơn tru với TS
+
+### Sprint 6: Testing & CI/CD
+> Trạng thái: **CHUẨN BỊ**
+
+- [ ] Unit tests: Các helpers và hooks (`useLoans`, `useSLAConfig`)
 - [ ] Component tests: `StatusBadge`, `MetricCard`, `SLABar`
 - [ ] Page tests: `Dashboard`, `Login`
 - [ ] Setup GitHub Actions CI (lint → test → build)
@@ -155,51 +162,54 @@ npm run lint:fix
 ```
 sla-rbt-app/
 ├── public/
-│   └── index.html              ← Entry HTML (cần fix: fonts, meta)
+│   └── index.html              ← Entry HTML (đã chuẩn hoá fonts, meta)
 ├── src/
 │   ├── components/              ← 12 components
-│   │   ├── AppHeader.js         ← Navigation bar (NavLink)
-│   │   ├── HolidaysConfig.js    ← Admin: quản lý ngày lễ
-│   │   ├── LoanCardComp.js      ← Card hiển thị hồ sơ vay
-│   │   ├── LoanDetailPanel.js   ← Chi tiết hồ sơ + hành động
-│   │   ├── MetricCard.js        ← Card số liệu dashboard
-│   │   ├── ProtectedRoute.js    ← Route guard (auth + role)
-│   │   ├── SLABar.js            ← Thanh progress SLA
-│   │   ├── SLAConfigPanel.js    ← Hiển thị cấu hình SLA
-│   │   ├── SLAStepsTable.js     ← Bảng các bước SLA
-│   │   ├── StatusBadge.js       ← Badge trạng thái (Ok/Warning/Exceeded)
-│   │   ├── StepCard.js          ← Card từng bước xử lý
-│   │   └── WorkingHoursConfig.js← Admin: cấu hình giờ làm việc
+│   │   ├── AppHeader.tsx        ← Navigation bar (NavLink)
+│   │   ├── HolidaysConfig.tsx   ← Admin: quản lý ngày lễ
+│   │   ├── LoanCardComp.tsx     ← Card hiển thị hồ sơ vay
+│   │   ├── LoanDetailPanel.tsx  ← Chi tiết hồ sơ + hành động
+│   │   ├── MetricCard.tsx       ← Card số liệu dashboard
+│   │   ├── ProtectedRoute.tsx   ← Route guard (auth + role)
+│   │   ├── SLABar.tsx           ← Thanh progress SLA
+│   │   ├── SLAConfigPanel.tsx   ← Hiển thị cấu hình SLA
+│   │   ├── SLAStepsTable.tsx    ← Bảng các bước SLA
+│   │   ├── StatusBadge.tsx      ← Badge trạng thái (Ok/Warning/Exceeded)
+│   │   ├── StepCard.tsx         ← Card từng bước xử lý
+│   │   └── WorkingHoursConfig.tsx← Admin: cấu hình giờ làm việc
 │   ├── pages/                   ← 6 pages
-│   │   ├── ConfigTab.js         ← Trang cấu hình (ADMIN only)
-│   │   ├── Dashboard.js         ← Trang tổng quan
-│   │   ├── LoansTab.js          ← Danh sách hồ sơ vay
-│   │   ├── Login.js             ← Trang đăng nhập
-│   │   ├── NotFound.js          ← Trang 404
-│   │   └── StaffPerf.js         ← Hiệu suất cán bộ (ADMIN only)
+│   │   ├── ConfigTab.tsx        ← Trang cấu hình (ADMIN only)
+│   │   ├── Dashboard.tsx        ← Trang tổng quan
+│   │   ├── LoansTab.tsx         ← Danh sách hồ sơ vay
+│   │   ├── Login.tsx            ← Trang đăng nhập
+│   │   ├── NotFound.tsx         ← Trang 404
+│   │   └── StaffPerf.tsx        ← Hiệu suất cán bộ (ADMIN only)
 │   ├── hooks/                   ← 3 custom hooks (React Query)
-│   │   ├── useLoans.js
-│   │   ├── useSLAConfig.js
-│   │   └── useStaffPerf.js
+│   │   ├── useLoans.ts
+│   │   ├── useSLAConfig.ts
+│   │   └── useStaffPerf.ts
 │   ├── context/                 ← 2 React Contexts
-│   │   ├── AuthContext.js       ← Authentication state
-│   │   └── ConfigContext.js     ← Business config (giờ làm, lễ)
+│   │   ├── AuthContext.tsx      ← Authentication state
+│   │   └── ConfigContext.tsx    ← Business config (giờ làm, lễ)
 │   ├── services/
-│   │   └── api.js               ← API layer (mock/real toggle)
+│   │   └── api.ts               ← API layer (mock/real toggle)
+│   ├── types/
+│   │   └── index.ts             ← Định nghĩa TS Interfaces
 │   ├── utils/
-│   │   ├── helpers.js           ← getSLAStatus, formatHours, calculateBusinessHours
-│   │   └── helpers.test.js      ← Unit tests
+│   │   ├── helpers.ts           ← getSLAStatus, formatHours, calculateBusinessHours
+│   │   └── helpers.test.ts      ← Unit tests
 │   ├── constants/
-│   │   └── mockData.js          ← Mock data (SLA_STEPS, LOANS, USERS, STAFF)
-│   ├── App.js                   ← Root component (138 lines)
-│   ├── App.test.js              ← Smoke test
-│   ├── index.js                 ← Entry point (QueryClient, BrowserRouter, Providers)
+│   │   └── mockData.ts          ← Mock data (SLA_STEPS, LOANS, USERS, STAFF)
+│   ├── App.tsx                  ← Root component
+│   ├── App.test.tsx             ← Smoke test
+│   ├── index.tsx                ← Entry point (QueryClient, BrowserRouter, Providers)
 │   └── index.css                ← Tailwind directives + base styles
 ├── tailwind.config.js           ← BIDV color palette + fonts
+├── tsconfig.json                ← Cấu hình biên dịch TypeScript
 ├── postcss.config.js
 ├── .prettierrc
 ├── .prettierignore
-└── package.json                 ← React 19 + React Query + Router + Axios
+└── package.json                 ← React + TS + Query + Router + Axios
 ```
 
 ---
@@ -255,11 +265,13 @@ sla-rbt-app/
 
 ## 📝 Ghi chú & Quyết định
 
-| Ngày | Nội dung |
+| วัน/Ngày | Nội dung |
 |---|---|
 | 2026-03-03 | Refactor xong cấu trúc thư mục từ App.js monolith → modular |
 | 2026-03-03 | ✅ **Sprint 1**: Chuyển đổi hoàn toàn sang Tailwind CSS + BIDV light theme |
 | 2026-03-03 | ✅ **Sprint 2**: Tích hợp `react-router-dom`, tạo 404 page |
 | 2026-03-03 | ✅ **Sprint 3**: Tích hợp React Query + Mock API, Authentication, Role-based access |
 | 2026-03-03 | ✅ **Sprint 3.5**: Admin config UI (WorkingHours, Holidays), `calculateBusinessHours()` |
-| 2026-03-04 | 📋 Đánh giá toàn diện lại dự án, cập nhật command.md |
+| 2026-03-04 | ✅ **Sprint 4**: Sửa các file index.html, Code smells, Formatting issues. |
+| 2026-03-04 | ✅ **Sprint 5**: Chuyển đổi toàn bộ Project sang TypeScript. |
+| 2026-03-04 | Cập nhật `command.md` định hướng cho Sprint 6 (Testing & CI/CD). |

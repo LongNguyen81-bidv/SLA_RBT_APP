@@ -173,7 +173,7 @@ function generateInitialProgress(loan: Loan): StepProgress[] {
 }
 
 export const MOCK_PROGRESS: StepProgress[][] = MOCK_LOANS.map((loan) =>
-  generateInitialProgress(loan),
+  generateInitialProgress(loan)
 );
 
 export const STAFF_PERF: StaffPerf[] = [

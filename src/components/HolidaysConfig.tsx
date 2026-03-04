@@ -54,7 +54,7 @@ export default function HolidaysConfig() {
       acc[month].push(h);
       return acc;
     },
-    {},
+    {}
   );
 
   const monthNames = [

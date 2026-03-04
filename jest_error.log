@@ -1,0 +1,132 @@
+﻿node.exe : FAIL src/utils/helpers.test.ts
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (FAIL src/utils/helpers.test.ts:St  
+  ring) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: C:\LongNguyen\vibeCode\sl
+a-rbt-app\src\utils\helpers.test.ts: 
+Unexpected token, expected "from" (2:12)
+
+    [0m [90m 1 |[39m [36mimport[39m 
+{ calculateBusinessHours[33m,[39m 
+getSLAStatus[33m,[39m 
+formatHours[33m,[39m getElapsedHours } 
+[36mfrom[39m 
+[32m'./helpers'[39m[33m;[39m
+    [31m[1m>[22m[39m[90m 2 |[39m 
+[36mimport[39m type { 
+[33mBusinessHoursCalcConfig[39m } 
+[36mfrom[39m 
+[32m'../types'[39m[33m;[39m
+     [90m   |[39m             
+[31m[1m^[22m[39m
+     [90m 3 |[39m
+     [90m 4 |[39m describe([32m'calcula
+teBusinessHours'[39m[33m,[39m () 
+[33m=>[39m {
+     [90m 5 |[39m   [36mconst[39m 
+config[33m:[39m 
+[33mBusinessHoursCalcConfig[39m 
+[33m=[39m {[0m
+
+      at toParseError (node_modules/@babel
+/parser/src/parse-error.ts:95:45)
+      at Parser.raise (node_modules/@babel
+/parser/src/tokenizer/index.ts:1504:19)
+      at Parser.unexpected (node_modules/@
+babel/parser/src/tokenizer/index.ts:1544:1
+6)
+      at Parser.expectContextual (node_mod
+ules/@babel/parser/src/parser/util.ts:114:
+12)
+      at 
+Parser.parseImportSpecifiersAndAfter (node
+_modules/@babel/parser/src/parser/statemen
+t.ts:3180:10)
+      at Parser.parseImport (node_modules/
+@babel/parser/src/parser/statement.ts:3148
+:17)
+      at Parser.parseStatementContent (nod
+e_modules/@babel/parser/src/parser/stateme
+nt.ts:647:25)
+      at Parser.parseStatementLike (node_m
+odules/@babel/parser/src/parser/statement.
+ts:482:17)
+      at Parser.parseModuleItem (node_modu
+les/@babel/parser/src/parser/statement.ts:
+419:17)
+      at 
+Parser.parseBlockOrModuleBlockBody (node_m
+odules/@babel/parser/src/parser/statement.
+ts:1443:16)
+      at Parser.parseBlockBody (node_modul
+es/@babel/parser/src/parser/statement.ts:1
+417:10)
+      at Parser.parseProgram (node_modules
+/@babel/parser/src/parser/statement.ts:229
+:10)
+      at Parser.parseTopLevel (node_module
+s/@babel/parser/src/parser/statement.ts:20
+3:25)
+      at Parser.parse (node_modules/@babel
+/parser/src/parser/index.ts:83:25)
+      at parse (node_modules/@babel/parser
+/src/index.ts:86:38)
+      at parser (node_modules/@babel/core/
+src/parser/index.ts:29:19)
+          at parser.next (<anonymous>)
+      at normalizeFile (node_modules/@babe
+l/core/src/transformation/normalize-file.t
+s:50:24)
+          at normalizeFile.next 
+(<anonymous>)
+      at run (node_modules/@babel/core/src
+/transformation/index.ts:41:36)
+          at run.next (<anonymous>)
+      at transform (node_modules/@babel/co
+re/src/transform.ts:29:20)
+          at transform.next (<anonymous>)
+      at evaluateSync 
+(node_modules/gensync/index.js:251:28)
+      at fn 
+(node_modules/gensync/index.js:89:14)
+      at stopHiding - secret - don't use 
+this - v1 (node_modules/@babel/core/src/er
+rors/rewrite-stack-trace.ts:99:14)
+      at transformSync (node_modules/@babe
+l/core/src/transform.ts:66:52)
+      at 
+ScriptTransformer.transformSource (node_mo
+dules/@jest/transform/build/ScriptTransfor
+mer.js:619:31)
+      at ScriptTransformer._transformAndBu
+ildScript (node_modules/@jest/transform/bu
+ild/ScriptTransformer.js:765:40)
+      at ScriptTransformer.transform (node
+_modules/@jest/transform/build/ScriptTrans
+former.js:822:19)
+      at TestScheduler.scheduleTests (node
+_modules/@jest/core/build/TestScheduler.js
+:333:13)
+      at runJest (node_modules/@jest/core/
+build/runJest.js:404:19)
+      at _run10000 (node_modules/@jest/cor
+e/build/cli/index.js:320:7)
+      at runCLI (node_modules/@jest/core/b
+uild/cli/index.js:173:3)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.456 s
+Ran all test suites matching 
+/src\\utils\\helpers.test.ts/i.

@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { SLA_STEPS, MOCK_LOANS, MOCK_PROGRESS, STAFF_PERF, USERS } from '../constants/mockData';
-import type { User, Loan, StepProgress, SLAStep, StaffPerf, LoginResponse, LoansData } from '../types';
+import type {
+  User,
+  Loan,
+  StepProgress,
+  SLAStep,
+  StaffPerf,
+  LoginResponse,
+  LoansData,
+} from '../types';
 
 // API Configuration
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
@@ -69,7 +77,7 @@ export const loansApi = {
   completeStep: async (
     loanId: string,
     stepId: number,
-    actionType: 'FORWARD' | 'BACKWARD',
+    actionType: 'FORWARD' | 'BACKWARD'
   ): Promise<{ success: boolean }> => {
     if (USE_MOCK) {
       await delay(600);

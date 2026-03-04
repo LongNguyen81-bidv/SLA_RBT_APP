@@ -1,0 +1,6 @@
+﻿src/hooks/useLoans.test.ts(29,26): error TS1005: '>' expected.
+src/hooks/useLoans.test.ts(29,32): error TS1005: ')' expected.
+src/hooks/useLoans.test.ts(29,58): error TS1161: Unterminated regular expression literal.
+src/hooks/useLoans.test.ts(30,3): error TS1128: Declaration or statement expected.
+src/hooks/useLoans.test.ts(66,1): error TS1128: Declaration or statement expected.
+src/hooks/useLoans.test.ts(66,2): error TS1128: Declaration or statement expected.

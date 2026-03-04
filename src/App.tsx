@@ -38,15 +38,15 @@ export default function App() {
         prog.filter(
           (p, i) =>
             p.actualHours &&
-            getSLAStatus(p.actualHours, SLA_STEPS?.[i]?.slaHours ?? 0) === 'exceeded',
-        ),
+            getSLAStatus(p.actualHours, SLA_STEPS?.[i]?.slaHours ?? 0) === 'exceeded'
+        )
       ).length,
-    [allProgress, SLA_STEPS],
+    [allProgress, SLA_STEPS]
   );
 
   const totalActive = useMemo(
     () => loans.filter((_, i) => allProgress[i]?.some((p) => !p.completed)).length,
-    [loans, allProgress],
+    [loans, allProgress]
   );
 
   const avgCompletion = useMemo(() => {
@@ -56,7 +56,7 @@ export default function App() {
       Math.round(
         (allProgress.reduce((sum, prog) => sum + prog.filter((p) => p.completed).length, 0) /
           loans.length) *
-          10,
+          10
       ) / 10
     );
   }, [loans, allProgress]);

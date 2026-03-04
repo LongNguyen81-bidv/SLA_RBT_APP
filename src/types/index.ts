@@ -100,7 +100,9 @@ export interface BusinessHoursCalcConfig {
 
 export interface ConfigContextType {
   config: BusinessConfig;
-  setConfig: (updater: Partial<BusinessConfig> | ((prev: BusinessConfig) => BusinessConfig)) => void;
+  setConfig: (
+    updater: Partial<BusinessConfig> | ((prev: BusinessConfig) => BusinessConfig)
+  ) => void;
   workingHours: {
     morning: { start: string; end: string };
     afternoon: { start: string; end: string };

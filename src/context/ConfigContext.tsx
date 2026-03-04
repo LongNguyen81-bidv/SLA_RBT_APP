@@ -89,25 +89,25 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
         return next;
       });
     },
-    [],
+    []
   );
 
   // Legacy hooks compatibility
   const workingHours = {
     morning: {
       start: `${String(Math.floor(config.startHour)).padStart(2, '0')}:${String(
-        Math.round((config.startHour % 1) * 60),
+        Math.round((config.startHour % 1) * 60)
       ).padStart(2, '0')}`,
       end: `${String(Math.floor(config.lunchBreak?.start || 12)).padStart(2, '0')}:${String(
-        Math.round(((config.lunchBreak?.start || 12) % 1) * 60),
+        Math.round(((config.lunchBreak?.start || 12) % 1) * 60)
       ).padStart(2, '0')}`,
     },
     afternoon: {
       start: `${String(Math.floor(config.lunchBreak?.end || 13)).padStart(2, '0')}:${String(
-        Math.round(((config.lunchBreak?.end || 13) % 1) * 60),
+        Math.round(((config.lunchBreak?.end || 13) % 1) * 60)
       ).padStart(2, '0')}`,
       end: `${String(Math.floor(config.endHour)).padStart(2, '0')}:${String(
-        Math.round((config.endHour % 1) * 60),
+        Math.round((config.endHour % 1) * 60)
       ).padStart(2, '0')}`,
     },
   };

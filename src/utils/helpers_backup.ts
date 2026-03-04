@@ -29,23 +29,21 @@ function normalizeConfig(config: BusinessHoursInput): BusinessHoursCalcConfig {
   };
 }
 
-export function getSLAStatus(actualHours: number | null, slaHours: number): SLAStatus {
+export const getSLAStatus = (actualHours: number | null, slaHours: number): SLAStatus => {
   if (actualHours === null) {
     return 'pending';
   }
-  // Use a small epsilon to fix floating point division errors (e.g. 19.2 / 24 = 0.7999999999999999)
   const ratio = actualHours / slaHours;
-  if (ratio > 1.000001) {
+  if (ratio > 1) {
     return 'exceeded';
   }
-  if (ratio >= 0.799999) {
+  if (ratio >= 0.8) {
     return 'warning';
   }
   return 'ok';
-}
+};
 
-
-export function formatHours(h: number | null | undefined): string {
+export const formatHours = (h: number | null | undefined): string => {
   if (h === null || h === undefined) {
     return '—';
   }
@@ -53,21 +51,24 @@ export function formatHours(h: number | null | undefined): string {
     return `${Math.round(h * 60)}p`;
   }
   return `${h.toFixed(1)}h`;
-}
+};
 
-export function getElapsedHours(startTime: number | null, config: BusinessHoursInput = {}): number {
+export const getElapsedHours = (
+  startTime: number | null,
+  config: BusinessHoursInput = {}
+): number => {
   if (!startTime) return 0;
   return calculateBusinessHours(startTime, Date.now(), config);
-}
+};
 
 /**
  * Calculates actual business hours between two timestamps based on a configuration.
  */
-export function calculateBusinessHours(
+export const calculateBusinessHours = (
   startTime: Date | string | number,
   endTime: Date | string | number,
   rawConfig: BusinessHoursInput = {}
-): number {
+): number => {
   if (!startTime || !endTime) return 0;
 
   const start = new Date(startTime);
@@ -142,4 +143,4 @@ export function calculateBusinessHours(
 
   // Convert milliseconds to hours
   return totalMilliseconds / (1000 * 60 * 60);
-}
+};

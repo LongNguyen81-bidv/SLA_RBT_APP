@@ -24,9 +24,9 @@ test('renders SLA Tracker app login page', () => {
           </MemoryRouter>
         </ConfigProvider>
       </AuthProvider>
-    </QueryClientProvider>,
+    </QueryClientProvider>
   );
-  
+
   const titleElement = screen.getByText(/SLA RBT APP/i);
   expect(titleElement).toBeInTheDocument();
 });

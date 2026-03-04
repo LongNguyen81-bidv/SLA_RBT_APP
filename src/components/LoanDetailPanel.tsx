@@ -14,7 +14,12 @@ interface LoanDetailPanelProps {
   TOTAL_INTERNAL_HOURS: number;
 }
 
-export default function LoanDetailPanel({ loan, progress, SLA_STEPS, TOTAL_INTERNAL_HOURS }: LoanDetailPanelProps) {
+export default function LoanDetailPanel({
+  loan,
+  progress,
+  SLA_STEPS,
+  TOTAL_INTERNAL_HOURS,
+}: LoanDetailPanelProps) {
   const { user } = useAuth();
   const { config } = useConfig();
   const queryClient = useQueryClient();
@@ -30,8 +35,15 @@ export default function LoanDetailPanel({ loan, progress, SLA_STEPS, TOTAL_INTER
     (config.lunchBreakEnabled ? config.lunchBreak.end - config.lunchBreak.start : 0);
 
   const mutation = useMutation({
-    mutationFn: ({ loanId, stepId, actionType }: { loanId: string; stepId: number; actionType: 'FORWARD' | 'BACKWARD' }) =>
-      loansApi.completeStep(loanId, stepId, actionType),
+    mutationFn: ({
+      loanId,
+      stepId,
+      actionType,
+    }: {
+      loanId: string;
+      stepId: number;
+      actionType: 'FORWARD' | 'BACKWARD';
+    }) => loansApi.completeStep(loanId, stepId, actionType),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['loans', user?.id],
@@ -45,7 +57,7 @@ export default function LoanDetailPanel({ loan, progress, SLA_STEPS, TOTAL_INTER
   const handleAction = (stepId: number, actionType: 'FORWARD' | 'BACKWARD') => {
     if (
       window.confirm(
-        `Xác nhận ${actionType === 'FORWARD' ? 'Hoàn thành và Bàn giao' : 'Trả lại'} bộ hồ sơ này?`,
+        `Xác nhận ${actionType === 'FORWARD' ? 'Hoàn thành và Bàn giao' : 'Trả lại'} bộ hồ sơ này?`
       )
     ) {
       mutation.mutate({ loanId: loan.id, stepId, actionType });

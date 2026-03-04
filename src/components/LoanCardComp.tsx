@@ -12,7 +12,13 @@ interface LoanCardCompProps {
   SLA_STEPS: SLAStep[];
 }
 
-export default function LoanCardComp({ loan, progress, onClick, selected, SLA_STEPS }: LoanCardCompProps) {
+export default function LoanCardComp({
+  loan,
+  progress,
+  onClick,
+  selected,
+  SLA_STEPS,
+}: LoanCardCompProps) {
   // Subscribe to config changes so elapsed hours recalculate on config update
   const { config } = useConfig();
 

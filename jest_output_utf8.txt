@@ -1,0 +1,42 @@
+
+> sla-rbt-app@0.1.0 test
+> react-scripts test src/utils/helpers.test.ts
+
+FAIL src/utils/helpers.test.ts
+  calculateBusinessHours
+    √ calculates hours on the same day without lunch overlap (1 ms)
+    √ calculates hours on the same day with lunch overlap
+    √ calculates multi-day including holidays
+    √ returns 0 if start is after end (1 ms)
+  getSLAStatus
+    √ returns pending
+    √ returns ok
+    × returns warning (3 ms)
+    √ returns exceeded
+
+  ● getSLAStatus › returns warning
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "warning"
+    Received: "ok"
+
+    [0m [90m 46 |[39m
+     [90m 47 |[39m   it([32m'returns warning'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 48 |[39m     expect(getSLAStatus([35m19.2[39m[33m,[39m [35m24[39m))[33m.[39mtoBe([32m'warning'[39m)[33m;[39m
+     [90m    |[39m                                    [31m[1m^[22m[39m
+     [90m 49 |[39m     expect(getSLAStatus([35m20[39m[33m,[39m [35m24[39m))[33m.[39mtoBe([32m'warning'[39m)[33m;[39m
+     [90m 50 |[39m     expect(getSLAStatus([35m24[39m[33m,[39m [35m24[39m))[33m.[39mtoBe([32m'warning'[39m)[33m;[39m
+     [90m 51 |[39m   })[33m;[39m[0m
+
+      at Object.<anonymous> (src/utils/helpers.test.ts:48:36)
+      at TestScheduler.scheduleTests (node_modules/@jest/core/build/TestScheduler.js:333:13)
+      at runJest (node_modules/@jest/core/build/runJest.js:404:19)
+      at _run10000 (node_modules/@jest/core/build/cli/index.js:320:7)
+      at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 7 passed, 8 total
+Snapshots:   0 total
+Time:        0.841 s, estimated 1 s
+Ran all test suites matching /src\\utils\\helpers.test.ts/i.
