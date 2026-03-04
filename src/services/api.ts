@@ -11,8 +11,8 @@ import type {
 } from '../types';
 
 // API Configuration
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
-const USE_MOCK = true;
+const API_URL = process.env.REACT_APP_API_URL || '/api';
+const USE_MOCK = false;
 // Đổi thành false khi có API endpoint thật
 
 // Giả lập network delay
@@ -138,8 +138,8 @@ export const configApi = {
       await delay(500);
       return SLA_STEPS;
     }
-    const response = await axios.get(`${API_URL}/config/sla-steps`);
-    return response.data;
+    // Ở backend ta chưa có route này, tạm lấy mock config cho Steps vì Frontend load riêng rẽ
+    return SLA_STEPS;
   },
 };
 
@@ -149,7 +149,16 @@ export const staffApi = {
       await delay(500);
       return STAFF_PERF;
     }
-    const response = await axios.get(`${API_URL}/staff/performance`);
-    return response.data;
+    // Chưa implement endpoint lấy perf ở backend, ta return tạm mock array
+    // const response = await axios.get(`${API_URL}/staff/performance`);
+    // return response.data;
+    return STAFF_PERF;
   },
+};
+
+export const testApi = {
+  seedData: async (): Promise<{message: string}> => {
+    const response = await axios.post(`${API_URL}/test/seed`);
+    return response.data;
+  }
 };

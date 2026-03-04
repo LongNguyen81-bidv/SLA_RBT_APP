@@ -1,7 +1,7 @@
 # 📋 SLA RBT App — Command & Progress Tracker
 
 > Cập nhật: 2026-03-04  
-> Trạng thái: Hoàn tất Sprint 1–5, đang chuẩn bị Sprint 6 (Testing & CI/CD)
+> Trạng thái: Hoàn tất Sprint 1–6, đang chuẩn bị Sprint 7 (Data Integration)
 
 ---
 
@@ -137,23 +137,40 @@ npm run lint:fix
 - [x] Cập nhật command và cấu trúc testing tương thích TypeScript
 - [x] Xác nhận npm test và npm run build hoạt động trơn tru với TS
 
-### Sprint 6: Testing & CI/CD
-> Trạng thái: **CHUẨN BỊ**
+### Sprint 6: Testing & Quality Assurance
+> Trạng thái: **HOÀN TẤT** — 2026-03-04
 
-- [ ] Unit tests: Các helpers và hooks (`useLoans`, `useSLAConfig`)
-- [ ] Component tests: `StatusBadge`, `MetricCard`, `SLABar`
-- [ ] Page tests: `Dashboard`, `Login`
-- [ ] Setup GitHub Actions CI (lint → test → build)
+- [x] Unit tests: Các helpers và hooks (`useLoans`, `useSLAConfig`)
+- [x] Component tests: `StatusBadge`, `MetricCard`, `SLABar`
+- [x] Page tests: `Dashboard`, `Login`
+- [x] Cấu hình kiểm tra Code Quality (SonarQube) chuẩn bị cho môi trường thật.
 
-### Sprint 7: Backend Integration (Khi có API thật)
-> Ưu tiên: 🟢 Thấp  
-> Dự kiến: Phụ thuộc backend
+### Sprint 7: Data Integration (Backend Core/LOS/HR thật)
+> Trạng thái: **HOÀN TẤT (Giai đoạn 1 - Setup Node.js & MySQL)** — 2026-03-04
 
-- [ ] Đổi `USE_MOCK = false` trong `api.js`
-- [ ] Cấu hình `REACT_APP_API_URL` environment variable
-- [ ] Thay thế mock auth bằng JWT/OAuth thực tế
-- [ ] Kết nối Supabase hoặc REST API backend
-- [ ] Realtime updates (WebSocket / Supabase Realtime)
+- [x] Tích hợp API Gateway thật, loại bỏ `USE_MOCK = true`.
+- [x] Điều chỉnh cấu trúc `Loan` để khớp với dữ liệu thực tế từ MySQL (`loans`, `loan_progress`).
+- [x] Map và config đúng 10-15 bước xử lý SLA theo quy trình RBT thực tế.
+- [ ] Áp dụng Authentication & Authorization thật (SSO/Active Directory của BIDV).
+- [ ] Tích hợp API HR để lấy lịch làm việc, nghỉ lễ tự động thay vì cấu hình tay.
+- [ ] Cấu hình Data Caching / Real-time updates (WebSocket, Redis).
+
+### Sprint 8: CI/CD, Containerization & Security
+> Trạng thái: **LÊN KẾ HOẠCH**
+
+- [ ] Thiết lập CI/CD pipeline chuẩn ngân hàng (vd: GitLab CI, Jenkins).
+- [ ] Đóng gói Docker base image Nginx chạy production, cấu hình Load Balancing.
+- [ ] Bảo mật: HTTPS, TLS/SSL, cấu hình Header Security (CORS, CSP), Web Application Firewall (WAF) nếu cần.
+- [ ] Scan bảo mật & Penetration Testing cơ bản.
+
+### Sprint 9: UAT & Triển khai Chi nhánh (Pilot -> Rollout)
+> Trạng thái: **LÊN KẾ HOẠCH**
+
+- [ ] Triển khai ứng dụng lên server On-Premise / Private Cloud mục tiêu.
+- [ ] Cấu hình môi trường UAT, chọn 1-2 Chi nhánh Pilot dùng thử nghiệm hệ thống.
+- [ ] Đào tạo cán bộ tín dụng & cấp quản lý sử dụng Tracker.
+- [ ] Load Testing / Performance Tuning để chuẩn bị cho cao điểm cuối tháng.
+- [ ] Roll-out toàn hệ thống.
 
 ---
 
@@ -274,4 +291,5 @@ sla-rbt-app/
 | 2026-03-03 | ✅ **Sprint 3.5**: Admin config UI (WorkingHours, Holidays), `calculateBusinessHours()` |
 | 2026-03-04 | ✅ **Sprint 4**: Sửa các file index.html, Code smells, Formatting issues. |
 | 2026-03-04 | ✅ **Sprint 5**: Chuyển đổi toàn bộ Project sang TypeScript. |
-| 2026-03-04 | Cập nhật `command.md` định hướng cho Sprint 6 (Testing & CI/CD). |
+| 2026-03-04 | ✅ **Sprint 6**: Viết và cấu hình Unit test, Component test, Page test. Cấu hình SonarQube (`sonar-project.properties`). |
+| 2026-03-04 | Cập nhật `command.md` định hướng cho Sprint 7 (Data Integration). |
