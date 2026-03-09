@@ -1,0 +1,191 @@
+﻿src/App.tsx(52,18): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/App.tsx(52,343): error TS1003: Identifier expected.
+src/App.tsx(52,344): error TS1005: '>' expected.
+src/App.tsx(52,347): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(54,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(57,9): error TS1109: Expression expected.
+src/App.tsx(57,18): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/App.tsx(57,188): error TS17008: JSX element 'h3' has no corresponding closing tag.
+src/App.tsx(57,245): error TS1003: Identifier expected.
+src/App.tsx(57,246): error TS1005: '>' expected.
+src/App.tsx(57,248): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(58,84): error TS1003: Identifier expected.
+src/App.tsx(58,85): error TS1005: '>' expected.
+src/App.tsx(58,88): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(60,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(63,6): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/App.tsx(64,34): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/App.tsx(64,104): error TS17008: JSX element 'Routes' has no corresponding closing tag.
+src/App.tsx(82,19): error TS17008: JSX element 'ProtectedRoute' has no corresponding closing tag.
+src/App.tsx(89,22): error TS1003: Identifier expected.
+src/App.tsx(89,23): error TS1005: '>' expected.
+src/App.tsx(89,37): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(90,13): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(91,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(105,138): error TS1003: Identifier expected.
+src/App.tsx(105,139): error TS1005: '>' expected.
+src/App.tsx(105,153): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(106,13): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(107,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(117,22): error TS1003: Identifier expected.
+src/App.tsx(117,23): error TS1005: '>' expected.
+src/App.tsx(117,37): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(118,13): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(119,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(119,59): error TS1003: Identifier expected.
+src/App.tsx(119,60): error TS1005: '>' expected.
+src/App.tsx(119,66): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/App.tsx(120,9): error TS17002: Expected corresponding JSX closing tag for 'ProtectedRoute'.
+src/App.tsx(120,15): error TS1005: '}' expected.
+src/App.tsx(120,17): error TS17002: Expected corresponding JSX closing tag for 'ProtectedRoute'.
+src/App.tsx(120,21): error TS1005: '}' expected.
+src/App.tsx(121,13): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/App.tsx(122,1): error TS1005: '</' expected.
+src/components/AppHeader.tsx(48,14): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/AppHeader.tsx(49,9): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/AppHeader.tsx(49,54): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/AppHeader.tsx(49,224): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(49,225): error TS1005: '>' expected.
+src/components/AppHeader.tsx(49,228): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(53,112): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(53,113): error TS1005: '>' expected.
+src/components/AppHeader.tsx(53,116): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(55,9): error TS17008: JSX element 'nav' has no corresponding closing tag.
+src/components/AppHeader.tsx(64,9): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(64,10): error TS1005: '>' expected.
+src/components/AppHeader.tsx(64,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(65,11): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/AppHeader.tsx(66,9): error TS17002: Expected corresponding JSX closing tag for 'NavLink'.
+src/components/AppHeader.tsx(66,15): error TS1005: ')' expected.
+src/components/AppHeader.tsx(67,13): error TS1005: ',' expected.
+src/components/AppHeader.tsx(68,14): error TS1005: ',' expected.
+src/components/AppHeader.tsx(68,18): error TS2657: JSX expressions must have one parent element.
+src/components/AppHeader.tsx(70,13): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(70,14): error TS1005: '>' expected.
+src/components/AppHeader.tsx(70,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(73,31): error TS17008: JSX element 'button' has no corresponding closing tag.
+src/components/AppHeader.tsx(76,141): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(76,142): error TS1005: '>' expected.
+src/components/AppHeader.tsx(76,148): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(78,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/AppHeader.tsx(78,147): error TS17008: JSX element 'span' has no corresponding closing tag.
+src/components/AppHeader.tsx(78,213): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(78,214): error TS1005: '>' expected.
+src/components/AppHeader.tsx(78,218): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/AppHeader.tsx(79,26): error TS1003: Identifier expected.
+src/components/AppHeader.tsx(79,27): error TS1005: ')' expected.
+src/components/AppHeader.tsx(79,27): error TS1005: '>' expected.
+src/components/AppHeader.tsx(80,3): error TS1109: Expression expected.
+src/components/AppHeader.tsx(80,4): error TS1005: '}' expected.
+src/components/AppHeader.tsx(81,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/AppHeader.tsx(82,1): error TS1005: '</' expected.
+src/pages/UsersTab.tsx(20,17): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/UsersTab.tsx(20,86): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(20,87): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(20,90): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(22,53): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(23,23): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(25,7): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(28,28): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(28,67): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(29,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(30,69): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(31,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(32,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(34,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(35,5): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(36,7): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(37,44): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(39,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(40,71): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(41,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(42,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(43,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(45,69): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(46,5): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(47,7): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(48,9): error TS1109: Expression expected.
+src/pages/UsersTab.tsx(50,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(51,73): error TS1005: '}' expected.
+src/pages/UsersTab.tsx(52,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(53,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(54,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(57,6): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/UsersTab.tsx(59,85): error TS17008: JSX element 'button' has no corresponding closing tag.
+src/pages/UsersTab.tsx(63,111): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(63,112): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(63,118): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(65,126): error TS17008: JSX element 'span' has no corresponding closing tag.
+src/pages/UsersTab.tsx(67,5): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(67,6): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(67,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(70,33): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/UsersTab.tsx(70,97): error TS17008: JSX element 'table' has no corresponding closing tag.
+src/pages/UsersTab.tsx(70,144): error TS17008: JSX element 'thead' has no corresponding closing tag.
+src/pages/UsersTab.tsx(70,153): error TS17008: JSX element 'tr' has no corresponding closing tag.
+src/pages/UsersTab.tsx(70,159): error TS17008: JSX element 'th' has no corresponding closing tag.
+src/pages/UsersTab.tsx(70,310): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(70,311): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(70,313): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(73,170): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(73,171): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(73,173): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(76,172): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(76,173): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(76,175): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(77,15): error TS17002: Expected corresponding JSX closing tag for 'th'.
+src/pages/UsersTab.tsx(77,22): error TS17002: Expected corresponding JSX closing tag for 'th'.
+src/pages/UsersTab.tsx(77,31): error TS17008: JSX element 'tbody' has no corresponding closing tag.
+src/pages/UsersTab.tsx(77,65): error TS17008: JSX element 'tr' has no corresponding closing tag.
+src/pages/UsersTab.tsx(79,9): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(79,10): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(79,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(84,5): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(84,6): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(84,8): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(92,120): error TS17008: JSX element 'button' has no corresponding closing tag.
+src/pages/UsersTab.tsx(93,166): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(93,167): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(93,173): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(100,38): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(100,39): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(100,41): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(101,15): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(102,13): error TS17002: Expected corresponding JSX closing tag for 'td'.
+src/pages/UsersTab.tsx(102,23): error TS17002: Expected corresponding JSX closing tag for 'td'.
+src/pages/UsersTab.tsx(102,32): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(102,33): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(102,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(107,91): error TS17008: JSX element 'form' has no corresponding closing tag.
+src/pages/UsersTab.tsx(107,150): error TS17008: JSX element 'label' has no corresponding closing tag.
+src/pages/UsersTab.tsx(107,228): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(107,229): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(107,234): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(114,56): error TS17008: JSX element 'label' has no corresponding closing tag.
+src/pages/UsersTab.tsx(114,131): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(114,132): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(114,137): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(121,56): error TS17008: JSX element 'label' has no corresponding closing tag.
+src/pages/UsersTab.tsx(121,130): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(121,131): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(121,136): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(128,56): error TS17008: JSX element 'label' has no corresponding closing tag.
+src/pages/UsersTab.tsx(128,128): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(128,129): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(128,134): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(134,56): error TS17008: JSX element 'option' has no corresponding closing tag.
+src/pages/UsersTab.tsx(134,86): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(134,87): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(134,93): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(135,92): error TS17008: JSX element 'button' has no corresponding closing tag.
+src/pages/UsersTab.tsx(137,153): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(137,154): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(137,160): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(144,37): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(144,38): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(144,42): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(145,30): error TS1003: Identifier expected.
+src/pages/UsersTab.tsx(145,31): error TS1005: '>' expected.
+src/pages/UsersTab.tsx(145,34): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UsersTab.tsx(147,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/UsersTab.tsx(148,1): error TS1005: '</' expected.

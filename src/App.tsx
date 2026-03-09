@@ -5,8 +5,8 @@ import Dashboard from './pages/Dashboard';
 import LoansTab from './pages/LoansTab';
 import StaffPerf from './pages/StaffPerf';
 import ConfigTab from './pages/ConfigTab';
+import UsersTab from './pages/UsersTab';
 import NotFound from './pages/NotFound';
-import { TOTAL_INTERNAL_HOURS } from './constants/mockData';
 import { getSLAStatus } from './utils/helpers';
 import { useLoans } from './hooks/useLoans';
 import { useSLAConfig } from './hooks/useSLAConfig';
@@ -31,6 +31,7 @@ export default function App() {
 
   const loans = loansData?.loans || [];
   const allProgress = loansData?.allProgress || [];
+  const TOTAL_INTERNAL_HOURS = (SLA_STEPS || []).filter(s => s.internal).reduce((sum, s) => sum + s.slaHours, 0);
 
   const totalExceeded = useMemo(
     () =>
@@ -88,76 +89,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface-100 text-[#1a3329] font-sans">
-      {' '}
       {user && <AppHeader />}
       <div className="px-4 sm:px-6 md:px-8 py-6 max-w-[1400px] mx-auto">
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Dashboard
-                  loans={loans}
-                  allProgress={allProgress}
-                  SLA_STEPS={SLA_STEPS || []}
-                  totalActive={totalActive}
-                  totalExceeded={totalExceeded}
-                  avgCompletion={avgCompletion}
-                  setSelectedLoan={setSelectedLoan}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/loans"
-            element={
-              <ProtectedRoute>
-                <LoansTab
-                  loans={loans}
-                  allProgress={allProgress}
-                  SLA_STEPS={SLA_STEPS || []}
-                  TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
-                  selectedLoan={selectedLoan}
-                  setSelectedLoan={setSelectedLoan}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/loans/:id"
-            element={
-              <ProtectedRoute>
-                <LoansTab
-                  loans={loans}
-                  allProgress={allProgress}
-                  SLA_STEPS={SLA_STEPS || []}
-                  TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
-                  selectedLoan={selectedLoan}
-                  setSelectedLoan={setSelectedLoan}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/staff"
-            element={
-              <ProtectedRoute requiredRole="ADMIN">
-                <StaffPerf STAFF_PERF={STAFF_PERF || []} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/config"
-            element={
-              <ProtectedRoute requiredRole="ADMIN">
-                <ConfigTab
-                  SLA_STEPS={SLA_STEPS || []}
-                  TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS}
-                />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<ProtectedRoute><Dashboard loans={loans} allProgress={allProgress} SLA_STEPS={SLA_STEPS || []} totalActive={totalActive} totalExceeded={totalExceeded} avgCompletion={avgCompletion} setSelectedLoan={setSelectedLoan} /></ProtectedRoute>} />
+          <Route path="/loans" element={<ProtectedRoute><LoansTab loans={loans} allProgress={allProgress} SLA_STEPS={SLA_STEPS || []} TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS} selectedLoan={selectedLoan} setSelectedLoan={setSelectedLoan} /></ProtectedRoute>} />
+          <Route path="/loans/:id" element={<ProtectedRoute><LoansTab loans={loans} allProgress={allProgress} SLA_STEPS={SLA_STEPS || []} TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS} selectedLoan={selectedLoan} setSelectedLoan={setSelectedLoan} /></ProtectedRoute>} />
+          <Route path="/staff" element={<ProtectedRoute requiredRole="ADMIN"><StaffPerf STAFF_PERF={STAFF_PERF || []} /></ProtectedRoute>} />
+          <Route path="/users" element={<ProtectedRoute requiredRole="ADMIN"><UsersTab /></ProtectedRoute>} />
+          <Route path="/config" element={<ProtectedRoute requiredRole="ADMIN"><ConfigTab SLA_STEPS={SLA_STEPS || []} TOTAL_INTERNAL_HOURS={TOTAL_INTERNAL_HOURS} /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

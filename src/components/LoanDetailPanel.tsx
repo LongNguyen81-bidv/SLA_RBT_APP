@@ -66,18 +66,15 @@ export default function LoanDetailPanel({
 
   return (
     <div>
-      {' '}
       {/* Loan header info */}
       <div className="mb-4">
         <div className="flex justify-between items-start">
           <div>
             <div className="text-lg font-bold text-bidv-green mb-0.5 font-sans">
-              {' '}
-              {loan.customer}{' '}
+              {loan.customer}
             </div>
             <div className="text-xs text-[#6B9E97] font-sans">
-              {' '}
-              {loan.id}· {loan.type}· {formatNumber(loan.amount)}· {loan.branch}{' '}
+              {loan.id} · {loan.type} · {formatNumber(loan.amount)} · {loan.branch}
             </div>
           </div>
           <div className="text-right">
@@ -87,10 +84,9 @@ export default function LoanDetailPanel({
                 loan.currentStepId ? 'text-orange-600' : 'text-green-600'
               }`}
             >
-              {' '}
               {loan.currentStepId
                 ? `Đang xử lý tại ${loan.assignedDept}`
-                : 'Hoàn thành toàn bộ'}{' '}
+                : 'Hoàn thành toàn bộ'}
             </div>
           </div>
         </div>
@@ -110,9 +106,7 @@ export default function LoanDetailPanel({
             </span>
           </div>
           <div className="text-[10px] text-[#94B5B0] font-mono">
-            {' '}
-            {config.holidays.length}
-            ngày lễ được trừ
+            {config.holidays.length} ngày lễ được trừ
           </div>
         </div>
       </div>
@@ -121,7 +115,6 @@ export default function LoanDetailPanel({
         I. CÁC BƯỚC NỘI BỘ NGÂN HÀNG · Tổng SLA: {TOTAL_INTERNAL_HOURS}h
       </div>
       <div className="flex flex-col gap-1.5 mb-5 relative">
-        {' '}
         {mutation.isPending && (
           <div className="absolute inset-0 bg-white/50 z-10 flex items-center justify-center rounded-lg">
             <div className="w-8 h-8 border-4 border-bidv-green border-t-transparent rounded-full animate-spin"></div>
@@ -131,14 +124,14 @@ export default function LoanDetailPanel({
           const prog = progress[step.id - 1];
           const isActive = step.id - 1 === activeStepIndex;
           const hasPermission =
-            isActive && (user?.role === 'ADMIN' || user?.dept === loan.assignedDept);
+            isActive && user?.role !== 'ADMIN' && user?.dept === loan.assignedDept;
 
           return (
             <div key={step.id} className="relative group">
-              <StepCard step={step} progress={prog} isActive={isActive} /> {/* Handover Actions */}
+              <StepCard step={step} progress={prog} isActive={isActive} />
+              {/* Handover Actions */}
               {hasPermission && (
                 <div className="absolute top-1/2 -translate-y-1/2 right-4 flex gap-2">
-                  {' '}
                   {step.id > 1 && (
                     <button
                       onClick={() => handleAction(step.id, 'BACKWARD')}
@@ -154,29 +147,27 @@ export default function LoanDetailPanel({
                     Hoàn thành & Bàn giao →
                   </button>
                 </div>
-              )}{' '}
+              )}
             </div>
           );
-        })}{' '}
+        })}
       </div>
       {/* External steps */}
       <div className="text-[11px] text-[#6B9E97] font-mono font-semibold mb-2.5 tracking-wider">
         II. CÁC BƯỚC NGOÀI NGÂN HÀNG (*)
       </div>
       <div className="flex flex-col gap-1.5">
-        {' '}
         {SLA_STEPS.filter((s) => !s.internal).map((step) => {
           const prog = progress[step.id - 1];
           const isActive = step.id - 1 === activeStepIndex;
           const hasPermission =
-            isActive && (user?.role === 'ADMIN' || user?.dept === loan.assignedDept);
+            isActive && user?.role !== 'ADMIN' && user?.dept === loan.assignedDept;
 
           return (
             <div key={step.id} className="relative group">
-              <StepCard step={step} progress={prog} isActive={isActive} />{' '}
+              <StepCard step={step} progress={prog} isActive={isActive} />
               {hasPermission && (
                 <div className="absolute top-1/2 -translate-y-1/2 right-4 flex gap-2">
-                  {' '}
                   {step.id > 1 && (
                     <button
                       onClick={() => handleAction(step.id, 'BACKWARD')}
@@ -192,10 +183,10 @@ export default function LoanDetailPanel({
                     Xác nhận kết quả & Đi tiếp
                   </button>
                 </div>
-              )}{' '}
+              )}
             </div>
           );
-        })}{' '}
+        })}
       </div>
       {/* Footnote */}
       <div className="mt-4 p-3 rounded-lg bg-[#FFFBEE] border border-bidv-gold-light text-[11px] text-bidv-gold-dark font-sans shadow-sm">

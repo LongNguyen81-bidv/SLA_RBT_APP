@@ -19,12 +19,12 @@ export default function LoanCardComp({
   selected,
   SLA_STEPS,
 }: LoanCardCompProps) {
-  // Subscribe to config changes so elapsed hours recalculate on config update
   const { config } = useConfig();
 
   const currentStep = progress.findIndex((p) => !p.completed);
   const completedCount = progress.filter((p) => p.completed).length;
   const hasExceeded = progress.some((p, i) => {
+    if (!SLA_STEPS[i]) return false;
     const hours = p.completed
       ? p.actualHours
       : i === currentStep
@@ -33,6 +33,7 @@ export default function LoanCardComp({
     return hours !== null && getSLAStatus(hours, SLA_STEPS[i].slaHours) === 'exceeded';
   });
   const hasWarning = progress.some((p, i) => {
+    if (!SLA_STEPS[i]) return false;
     const hours = p.completed
       ? p.actualHours
       : i === currentStep
@@ -43,7 +44,6 @@ export default function LoanCardComp({
   const elapsed = getElapsedHours(loan.startTime, config);
   const overallStatus: SLAStatus = hasExceeded ? 'exceeded' : hasWarning ? 'warning' : 'ok';
 
-  // Determine effective work hours per day from config
   const workHoursPerDay =
     config.endHour -
     config.startHour -
@@ -60,10 +60,9 @@ export default function LoanCardComp({
             : 'bg-white border-[#C5DED9] shadow-sm'
       }`}
     >
-      {' '}
       {/* Top: ID + Badge */}
       <div className="flex justify-between mb-1.5">
-        <span className="font-mono text-[11px] text-bidv-green-mid"> {loan.id} </span>
+        <span className="font-mono text-[11px] text-bidv-green-mid">{loan.id}</span>
         <StatusBadge
           status={overallStatus}
           label={
@@ -76,18 +75,17 @@ export default function LoanCardComp({
         />
       </div>
       {/* Customer name */}
-      <div className="text-sm font-semibold text-[#1a3329] mb-0.5 font-sans"> {loan.customer} </div>
+      <div className="text-sm font-semibold text-[#1a3329] mb-0.5 font-sans">{loan.customer}</div>
       {/* Type + Amount */}
       <div className="text-xs text-[#6B9E97] mb-2.5 font-sans">
-        {' '}
-        {loan.type}· {formatNumber(loan.amount)}{' '}
+        {loan.type} · {formatNumber(loan.amount)}
       </div>
       {/* Mini progress bars */}
       <div className="flex gap-0.5 mb-2">
-        {' '}
         {SLA_STEPS.map((step, i) => {
           const s = progress[i];
           let st: SLAStatus = 'pending';
+          if (!s) return <div key={step.id} className="flex-1 h-1 rounded-[1px] bg-[#E2EFED]" />;
           if (s.completed) {
             st = getSLAStatus(s.actualHours, step.slaHours);
           } else if (i === currentStep && s.startedAt) {
@@ -101,18 +99,16 @@ export default function LoanCardComp({
             pending: 'bg-[#E2EFED]',
           };
           return <div key={step.id} className={`flex-1 h-1 rounded-[1px] ${colorMap[st]}`} />;
-        })}{' '}
+        })}
       </div>
       {/* Footer: Step count + elapsed */}
       <div className="flex justify-between text-[11px] text-[#94B5B0] font-sans">
         <span>
-          Bước {currentStep === -1 ? 10 : currentStep + 1}/{SLA_STEPS.length}· {completedCount}
+          Bước {currentStep === -1 ? 10 : currentStep + 1}/{SLA_STEPS.length} · {completedCount}{' '}
           hoàn thành
         </span>
         <span title={`Giờ làm việc: ${workHoursPerDay}h/ngày`}>
-          {' '}
-          {formatHours(elapsed)}
-          đã trôi qua
+          {formatHours(elapsed)} đã trôi qua
         </span>
       </div>
     </div>

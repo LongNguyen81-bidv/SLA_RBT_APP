@@ -9,17 +9,18 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     role ENUM('ADMIN', 'USER') NOT NULL,
     dept VARCHAR(100) NOT NULL,
+    dept_code VARCHAR(20) DEFAULT NULL,
     name VARCHAR(255) NOT NULL
 );
 
 -- Dữ liệu mẫu (Users - Tương đương mockData)
-INSERT INTO users (id, username, password, role, dept, name) VALUES
-('1', 'admin', '1', 'ADMIN', 'QLNB', 'Trần Quản Trị'),
-('2', 'qhkh', '1', 'USER', 'QHKH', 'Nguyễn Văn Quan Hệ'),
-('3', 'dinhgia', '1', 'USER', 'Định giá TS', 'Lê Thị Định Giá'),
-('4', 'thamdinh', '1', 'USER', 'Thẩm định', 'Phạm Thẩm Định'),
-('5', 'pheduyet', '1', 'USER', 'Phê duyệt', 'Hoàng Phê Duyệt'),
-('6', 'httd', '1', 'USER', 'HTTD', 'Vũ Hỗ Trợ')
+INSERT INTO users (id, username, password, role, dept, dept_code, name) VALUES
+('1', 'admin', '1', 'ADMIN', 'QLNB', '000', 'Trần Quản Trị'),
+('2', 'qhkh', '1', 'USER', 'QHKH', '001', 'Nguyễn Văn Quan Hệ'),
+('3', 'dinhgia', '1', 'USER', 'Định giá TS', '002', 'Lê Thị Định Giá'),
+('4', 'thamdinh', '1', 'USER', 'Thẩm định', '003', 'Phạm Thẩm Định'),
+('5', 'pheduyet', '1', 'USER', 'Phê duyệt', '004', 'Hoàng Phê Duyệt'),
+('6', 'httd', '1', 'USER', 'HTTD', '005', 'Vũ Hỗ Trợ')
 ON DUPLICATE KEY UPDATE username=username;
 
 -- 2. Bảng SLA Steps Config

@@ -1,4 +1,6 @@
-import React from 'react';
+const fs = require('fs');
+
+const headerTsx = `import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -55,11 +57,11 @@ export default function AppHeader() {
             key={n.id}
             to={n.id}
             className={({ isActive }) =>
-              `px-3.5 py-1.5 rounded-md border-none cursor-pointer text-xs font-medium font-sans transition-all duration-200 border-b-2 ${
+              \`px-3.5 py-1.5 rounded-md border-none cursor-pointer text-xs font-medium font-sans transition-all duration-200 border-b-2 \${
                 isActive
                   ? 'bg-bidv-green-tint text-bidv-green border-b-bidv-gold'
                   : 'bg-transparent text-[#6B9E97] border-b-transparent hover:bg-bidv-green-surface hover:text-bidv-green-mid'
-              }`
+              }\`
             }
           >
             {n.label}
@@ -94,4 +96,7 @@ export default function AppHeader() {
       </div>
     </div>
   );
-}
+}`;
+
+fs.writeFileSync('src/components/AppHeader.tsx', headerTsx);
+console.log('AppHeader.tsx fixed via node fs');

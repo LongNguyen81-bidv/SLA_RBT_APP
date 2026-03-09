@@ -1,14 +1,21 @@
 import axios from 'axios';
-import { SLA_STEPS, MOCK_LOANS, MOCK_PROGRESS, STAFF_PERF, USERS } from '../constants/mockData';
+import {
+    SLA_STEPS,
+    MOCK_LOANS,
+    MOCK_PROGRESS,
+    STAFF_PERF,
+    USERS
+} from '../constants/mockData';
 import type {
-  User,
-  Loan,
-  StepProgress,
-  SLAStep,
-  StaffPerf,
-  LoginResponse,
-  LoansData,
-} from '../types';
+    User,
+    Loan,
+    StepProgress,
+    SLAStep,
+    StaffPerf,
+    LoginResponse,
+    LoansData
+}
+from '../types';
 
 // API Configuration
 const API_URL = process.env.REACT_APP_API_URL || '/api';
@@ -16,149 +23,205 @@ const USE_MOCK = false;
 // Đổi thành false khi có API endpoint thật
 
 // Giả lập network delay
-const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms : number) : Promise < void > => new Promise((resolve) => setTimeout(resolve, ms));
 
 // MOCK LOCAL STORAGE STATE to persist changes within session
 let currentLoans: Loan[] = [...MOCK_LOANS];
 let currentProgress: StepProgress[][] = JSON.parse(JSON.stringify(MOCK_PROGRESS));
 
 export const authApi = {
-  login: async (username: string, password: string): Promise<LoginResponse> => {
-    if (USE_MOCK) {
-      await delay(500);
-      const user = USERS.find((u) => u.username === username && u.password === password);
-      if (user) {
-        return { token: 'mock-jwt-token-123', user };
-      }
-      throw new Error('Sai tài khoản hoặc mật khẩu');
+    login: async (username : string, password : string): Promise<LoginResponse> => {
+        if (USE_MOCK) {
+            await delay(500);
+            const user = USERS.find((u) => u.username === username && u.password === password);
+            if (user) {
+                return {token: 'mock-jwt-token-123', user};
+            }
+            throw new Error('Sai tài khoản hoặc mật khẩu');
+        }
+        // Thực tế
+        const response = await axios.post(`${API_URL}/auth/login`, {username, password});
+        return response.data;
     }
-    // Thực tế
-    const response = await axios.post(`${API_URL}/auth/login`, { username, password });
-    return response.data;
-  },
 };
 
 export const loansApi = {
-  getLoans: async (currentUser: User | null): Promise<LoansData> => {
-    if (USE_MOCK) {
-      await delay(800);
+    getLoans: async (currentUser : User | null): Promise<LoansData> => {
+        if (USE_MOCK) {
+            await delay(800);
 
-      let filteredLoans: Loan[] = currentLoans;
-      let filteredProgress: StepProgress[][] = currentProgress;
+            let filteredLoans: Loan[] = currentLoans;
+            let filteredProgress: StepProgress[][] = currentProgress;
 
-      // Phân quyền dữ liệu trả về
-      if (currentUser?.role !== 'ADMIN') {
-        const dept = currentUser?.dept;
-        filteredLoans = currentLoans.filter((loan) => {
-          // Thấy nếu assign cho phòng ban của mình
-          if (loan.assignedDept === dept) return true;
+            // Phân quyền dữ liệu trả về
+            if (currentUser ?. role !== 'ADMIN') {
+                const dept = currentUser ?. dept;
+                filteredLoans = currentLoans.filter((loan) => { // Thấy nếu assign cho phòng ban của mình
+                    if (loan.assignedDept === dept) 
+                        return true;
+                    
 
-          // Hoặc đã từng xử lý (completed by this dept) - simplifed: admin sees all, user sees current only
-          return false;
-        });
 
-        // Map lại progress tương ứng
-        filteredProgress = filteredLoans.map((loan) => {
-          const originalIndex = currentLoans.findIndex((l) => l.id === loan.id);
-          return currentProgress[originalIndex];
-        });
-      }
+                    // Hoặc đã từng xử lý (completed by this dept) - simplifed: admin sees all, user sees current only
+                    return false;
+                });
 
-      return { loans: filteredLoans, allProgress: filteredProgress };
-    }
-    const response = await axios.get(`${API_URL}/loans`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    return response.data;
-  },
+                // Map lại progress tương ứng
+                filteredProgress = filteredLoans.map((loan) => {
+                    const originalIndex = currentLoans.findIndex((l) => l.id === loan.id);
+                    return currentProgress[originalIndex];
+                });
+            }
 
-  completeStep: async (
-    loanId: string,
-    stepId: number,
-    actionType: 'FORWARD' | 'BACKWARD'
-  ): Promise<{ success: boolean }> => {
-    if (USE_MOCK) {
-      await delay(600);
-      const loanIndex = currentLoans.findIndex((l) => l.id === loanId);
-      if (loanIndex === -1) throw new Error('Loan not found');
-
-      const loan = currentLoans[loanIndex];
-      const progArr = currentProgress[loanIndex];
-      const stepProgIndex = progArr.findIndex((p) => p.stepId === stepId);
-
-      if (actionType === 'FORWARD') {
-        // Complete current step
-        progArr[stepProgIndex].completed = true;
-        const startedAt = progArr[stepProgIndex].startedAt || Date.now() - 3600000;
-        progArr[stepProgIndex].actualHours = (Date.now() - startedAt) / 3600000 || 1.5;
-
-        // Move to next step if any
-        if (stepId < SLA_STEPS.length) {
-          const nextStep = SLA_STEPS.find((s) => s.id === stepId + 1)!;
-          loan.currentStepId = nextStep.id;
-          loan.assignedDept = nextStep.owner;
-
-          progArr[stepProgIndex + 1].startedAt = Date.now();
-          progArr[stepProgIndex + 1].completed = false;
-        } else {
-          loan.currentStepId = null; // Hoàn thành toàn bộ
-          loan.assignedDept = 'Hoàn thành';
+            return {loans: filteredLoans, allProgress: filteredProgress};
         }
-      } else if (actionType === 'BACKWARD') {
-        // Reject to previous step
-        if (stepId > 1) {
-          const prevStep = SLA_STEPS.find((s) => s.id === stepId - 1)!;
-          loan.currentStepId = prevStep.id;
-          loan.assignedDept = prevStep.owner;
+        const response = await axios.get(`${API_URL}/loans`, {
+            headers: {
+                Authorization: `Bearer ${
+                    localStorage.getItem('token')
+                }`
+            }
+        });
+        return response.data;
+    },
 
-          // Đặt lại trạng thái bước trước chưa hoàn thành
-          progArr[stepProgIndex - 1].completed = false;
-          progArr[stepProgIndex - 1].actualHours = null;
-          progArr[stepProgIndex - 1].startedAt = Date.now();
-          // Reset time for rework
+    completeStep: async (loanId : string, stepId : number, actionType : 'FORWARD' | 'BACKWARD'): Promise<{ success: boolean }> => {
+        if (USE_MOCK) {
+            await delay(600);
+            const loanIndex = currentLoans.findIndex((l) => l.id === loanId);
+            if (loanIndex === -1) 
+                throw new Error('Loan not found');
+            
 
-          // Clear current step
-          progArr[stepProgIndex].startedAt = null;
-          progArr[stepProgIndex].completed = false;
+
+            const loan = currentLoans[loanIndex];
+            const progArr = currentProgress[loanIndex];
+            const stepProgIndex = progArr.findIndex((p) => p.stepId === stepId);
+
+            if (actionType === 'FORWARD') { // Complete current step
+                progArr[stepProgIndex].completed = true;
+                const startedAt = progArr[stepProgIndex].startedAt || Date.now() - 3600000;
+                progArr[stepProgIndex].actualHours = (Date.now() - startedAt) / 3600000 || 1.5;
+
+                // Move to next step if any
+                if (stepId < SLA_STEPS.length) {
+                    const nextStep = SLA_STEPS.find((s) => s.id === stepId + 1)!;
+                    loan.currentStepId = nextStep.id;
+                    loan.assignedDept = nextStep.owner;
+
+                    progArr[stepProgIndex + 1].startedAt = Date.now();
+                    progArr[stepProgIndex + 1].completed = false;
+                } else {
+                    loan.currentStepId = null; // Hoàn thành toàn bộ
+                    loan.assignedDept = 'Hoàn thành';
+                }
+            } else if (actionType === 'BACKWARD') { // Reject to previous step
+                if (stepId > 1) {
+                    const prevStep = SLA_STEPS.find((s) => s.id === stepId - 1)!;
+                    loan.currentStepId = prevStep.id;
+                    loan.assignedDept = prevStep.owner;
+
+                    // Đặt lại trạng thái bước trước chưa hoàn thành
+                    progArr[stepProgIndex - 1].completed = false;
+                    progArr[stepProgIndex - 1].actualHours = null;
+                    progArr[stepProgIndex - 1].startedAt = Date.now();
+                    // Reset time for rework
+
+                    // Clear current step
+                    progArr[stepProgIndex].startedAt = null;
+                    progArr[stepProgIndex].completed = false;
+                }
+            }
+
+            return {success: true};
         }
-      }
-
-      return { success: true };
+        const response = await axios.post(`${API_URL}/loans/${loanId}/steps/${stepId}`, {actionType});
+        return response.data;
     }
-    const response = await axios.post(`${API_URL}/loans/${loanId}/steps/${stepId}`, { actionType });
-    return response.data;
-  },
 };
 
 export const configApi = {
-  getSLAConfig: async (): Promise<SLAStep[]> => {
-    if (USE_MOCK) {
-      await delay(500);
-      return SLA_STEPS;
+    getSLAConfig: async (): Promise<SLAStep[]> => {
+        if (USE_MOCK) {
+            await delay(500);
+            return SLA_STEPS;
+        }
+        const response = await axios.get(`${API_URL}/sla-steps`);
+        return response.data;
     }
-    // Ở backend ta chưa có route này, tạm lấy mock config cho Steps vì Frontend load riêng rẽ
-    return SLA_STEPS;
-  },
 };
 
 export const staffApi = {
-  getStaffPerf: async (): Promise<StaffPerf[]> => {
-    if (USE_MOCK) {
-      await delay(500);
-      return STAFF_PERF;
+    getStaffPerf: async (): Promise<StaffPerf[]> => {
+        if (USE_MOCK) {
+            await delay(500);
+            return STAFF_PERF;
+        }
+        // Chưa implement endpoint lấy perf ở backend, ta return tạm mock array
+        // const response = await axios.get(`${API_URL}/staff/performance`);
+        // return response.data;
+        return STAFF_PERF;
     }
-    // Chưa implement endpoint lấy perf ở backend, ta return tạm mock array
-    // const response = await axios.get(`${API_URL}/staff/performance`);
-    // return response.data;
-    return STAFF_PERF;
-  },
 };
 
 export const testApi = {
-  seedData: async (): Promise<{message: string}> => {
-    const response = await axios.post(`${API_URL}/test/seed`);
-    return response.data;
-  }
+    seedData: async (): Promise<{message: string}> => {
+        const response = await axios.post(`${API_URL}/test/seed`);
+        return response.data;
+    }
+};
+
+export const usersApi = {
+    getUsers: async (): Promise<User[]> => {
+        if (USE_MOCK) {
+            await delay(500);
+            return USERS;
+        }
+        const response = await axios.get(`${API_URL}/users`);
+        return response.data;
+    },
+
+    addUser: async (userData : Omit < User, 'id' | 'password' >): Promise<{ message: string, user: User, newPassword?: string }> => {
+        if (USE_MOCK) {
+            await delay(500);
+            const newUser: User = {
+                ...userData,
+                id: 'U' + Date.now(),
+                password: Math.floor(100000 + Math.random() * 900000).toString()
+            };
+            USERS.push(newUser);
+            return {message: 'Tạo người dùng thành công', user: newUser, newPassword: newUser.password};
+        }
+        const response = await axios.post(`${API_URL}/users`, userData);
+        return response.data;
+    },
+
+    deleteUser: async (id : string): Promise<{ message: string }> => {
+        if (USE_MOCK) {
+            await delay(500);
+            const index = USERS.findIndex(u => u.id === id);
+            if (index > -1) 
+                USERS.splice(index, 1);
+            
+
+            return {message: 'Xóa người dùng thành công'};
+        }
+        const response = await axios.delete(`${API_URL}/users/${id}`);
+        return response.data;
+    },
+
+    resetPassword: async (id : string): Promise<{ message: string, newPassword?: string }> => {
+        if (USE_MOCK) {
+            await delay(500);
+            const user = USERS.find(u => u.id === id);
+            if (user) {
+                const newPassword = Math.floor(100000 + Math.random() * 900000).toString();
+                user.password = newPassword;
+                return {message: 'Khôi phục mật khẩu thành công', newPassword};
+            }
+            throw new Error('User not found');
+        }
+        const response = await axios.post(`${API_URL}/users/${id}/reset-password`);
+        return response.data;
+    }
 };
