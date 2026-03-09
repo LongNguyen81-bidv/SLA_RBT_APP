@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatNumber } from '../utils/helpers';
 
 interface MetricCardProps {
   label: string;
@@ -15,7 +16,7 @@ export default function MetricCard({ label, value, sub, accent }: MetricCardProp
         style={{ background: accent }}
       />
       <div className="text-[11px] text-[#6B9E97] mb-1.5 font-sans font-medium"> {label} </div>
-      <div className="text-[28px] font-bold text-bidv-green font-mono leading-none"> {value} </div>
+      <div className="text-[28px] font-bold text-bidv-green font-mono leading-none"> {formatNumber(value)} </div>
       {sub && <div className="text-[11px] text-[#94B5B0] mt-1 font-sans"> {sub} </div>}{' '}
     </div>
   );

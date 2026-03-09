@@ -1,4 +1,5 @@
-import React from 'react';
+const fs = require('fs');
+const content = `import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MetricCard from '../components/MetricCard';
 import LoanCardComp from '../components/LoanCardComp';
@@ -44,10 +45,10 @@ export default function Dashboard({
           Xin chào, {user?.name}
         </div>
         <div className="text-sm font-semibold text-bidv-gold-dark mb-1 font-sans">
-          Vai trò: {user?.role === 'ADMIN' ? 'Quản lý Nội bộ (Admin)' : `Cán bộ ${user?.dept}`}
+          Vai trò: {user?.role === 'ADMIN' ? 'Quản lý Nội bộ (Admin)' : \`Cán bộ \${user?.dept}\`}
         </div>
         <div className="text-xs text-[#6B9E97] font-sans mt-2">
-          Cập nhật lúc {new Date().toLocaleTimeString('vi-VN')} · {formatNumber(loans.length)}{' '}
+          Cập nhật lúc {new Date().toLocaleTimeString('vi-VN')} · {formatNumber(loans.length)}
           hồ sơ liên quan
         </div>
       </div>
@@ -63,7 +64,7 @@ export default function Dashboard({
             </span>
             {config.lunchBreakEnabled && (
               <>
-                {' '}· Nghỉ trưa:
+                · Nghỉ trưa:
                 <span className="font-semibold text-bidv-gold-dark">
                   {' '}
                   {hourToTime(config.lunchBreak.start)} → {hourToTime(config.lunchBreak.end)}
@@ -72,8 +73,10 @@ export default function Dashboard({
             )}
             {' · '}
             <span className="font-semibold"> {formatHours(workHoursPerDay)}</span>/ngày {' · '}
-            <span className="font-semibold"> {config.workDays.length}</span> ngày/tuần {' · '}
-            <span className="font-semibold"> {config.holidays.length}</span> ngày lễ
+            <span className="font-semibold"> {config.workDays.length}</span>
+            ngày/tuần {' · '}
+            <span className="font-semibold"> {config.holidays.length}</span>
+            ngày lễ
           </span>
         </div>
         {user?.role === 'ADMIN' && (
@@ -90,7 +93,7 @@ export default function Dashboard({
         <MetricCard
           label="Hồ sơ đang xử lý"
           value={totalActive}
-          sub={`trong tổng số ${formatNumber(loans.length)} hồ sơ`}
+          sub={\`trong tổng số \${formatNumber(loans.length)} hồ sơ\`}
           accent="#004D40"
         />
         <MetricCard
@@ -101,14 +104,14 @@ export default function Dashboard({
         />
         <MetricCard
           label="Bước TB hoàn thành"
-          value={`${avgCompletion}/10`}
+          value={\`\${avgCompletion}/10\`}
           sub="trên tổng 10 bước"
           accent="#10B981"
         />
         <MetricCard
           label="Giờ LV hiệu lực"
           value={formatHours(workHoursPerDay)}
-          sub={`${config.workDays.length} ngày/tuần · ${config.holidays.length} ngày lễ`}
+          sub={\`\${config.workDays.length} ngày/tuần · \${config.holidays.length} ngày lễ\`}
           accent="#C9A84C"
         />
       </div>
@@ -136,3 +139,7 @@ export default function Dashboard({
     </div>
   );
 }
+\`;
+
+fs.writeFileSync('src/pages/Dashboard.tsx', content, 'utf8');
+console.log('Dashboard rewritten cleanly');

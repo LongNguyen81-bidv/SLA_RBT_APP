@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSLAStatus, formatHours, getElapsedHours } from '../utils/helpers';
+import { getSLAStatus, formatHours, getElapsedHours, formatNumber } from '../utils/helpers';
 import StatusBadge from './StatusBadge';
 import { useConfig } from '../context/ConfigContext';
 import type { Loan, StepProgress, SLAStep, SLAStatus } from '../types';
@@ -80,7 +80,7 @@ export default function LoanCardComp({
       {/* Type + Amount */}
       <div className="text-xs text-[#6B9E97] mb-2.5 font-sans">
         {' '}
-        {loan.type}· {loan.amount}{' '}
+        {loan.type}· {formatNumber(loan.amount)}{' '}
       </div>
       {/* Mini progress bars */}
       <div className="flex gap-0.5 mb-2">

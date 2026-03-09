@@ -1,5 +1,6 @@
 import React from 'react';
 import StatusBadge from '../components/StatusBadge';
+import { formatNumber } from '../utils/helpers';
 import type { StaffPerf as StaffPerfType, SLAStatus } from '../types';
 
 interface StaffPerfProps {
@@ -74,7 +75,7 @@ export default function StaffPerf({ STAFF_PERF }: StaffPerfProps) {
                   <td className="px-4 py-3 text-[11px] text-[#94B5B0] font-sans"> {s.dept} </td>
                   <td className="px-4 py-3 font-mono text-xs text-bidv-green font-semibold">
                     {' '}
-                    {s.loans}{' '}
+                    {formatNumber(s.loans)}{' '}
                   </td>
                   <td className="px-4 py-3">
                     <span

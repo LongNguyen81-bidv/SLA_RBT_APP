@@ -1,0 +1,49 @@
+src/pages/Dashboard.tsx(37,18): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(38,13): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(38,39): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(40,13): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(40,14): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(40,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(49,27): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(49,28): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(49,31): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(51,13): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(51,149): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(51,229): error TS17008: JSX element 'span' has no corresponding closing tag.
+src/pages/Dashboard.tsx(51,240): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(51,241): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(51,245): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(52,12): error TS17008: JSX element 'span' has no corresponding closing tag.
+src/pages/Dashboard.tsx(58,42): error TS17014: JSX fragment has no corresponding closing tag.
+src/pages/Dashboard.tsx(68,17): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(68,18): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(68,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(69,17): error TS17002: Expected corresponding JSX closing tag for 'span'.
+src/pages/Dashboard.tsx(69,18): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(70,9): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/Dashboard.tsx(72,13): error TS17008: JSX element 'span' has no corresponding closing tag.
+src/pages/Dashboard.tsx(74,13): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(74,14): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(74,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(78,13): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(78,14): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(78,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(82,13): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(82,14): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(82,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(83,22): error TS17002: Expected corresponding JSX closing tag for 'span'.
+src/pages/Dashboard.tsx(87,110): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(87,111): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(87,117): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(88,10): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/Dashboard.tsx(89,9): error TS17002: Expected corresponding JSX closing tag for 'button'.
+src/pages/Dashboard.tsx(89,15): error TS1005: ')' expected.
+src/pages/Dashboard.tsx(114,17): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/Dashboard.tsx(114,127): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(114,128): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(114,131): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(132,6): error TS1003: Identifier expected.
+src/pages/Dashboard.tsx(132,7): error TS1005: '>' expected.
+src/pages/Dashboard.tsx(132,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/Dashboard.tsx(134,82): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/Dashboard.tsx(135,1): error TS1005: '</' expected.

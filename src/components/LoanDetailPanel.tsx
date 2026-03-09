@@ -4,7 +4,7 @@ import StepCard from './StepCard';
 import { useAuth } from '../context/AuthContext';
 import { useConfig } from '../context/ConfigContext';
 import { loansApi } from '../services/api';
-import { formatHours, getElapsedHours } from '../utils/helpers';
+import { formatHours, getElapsedHours, formatNumber } from '../utils/helpers';
 import type { Loan, StepProgress, SLAStep } from '../types';
 
 interface LoanDetailPanelProps {
@@ -77,7 +77,7 @@ export default function LoanDetailPanel({
             </div>
             <div className="text-xs text-[#6B9E97] font-sans">
               {' '}
-              {loan.id}· {loan.type}· {loan.amount}· {loan.branch}{' '}
+              {loan.id}· {loan.type}· {formatNumber(loan.amount)}· {loan.branch}{' '}
             </div>
           </div>
           <div className="text-right">

@@ -44,6 +44,11 @@ export function getSLAStatus(actualHours: number | null, slaHours: number): SLAS
   return 'ok';
 }
 
+export function hourToTime(h: number): string {
+  const hh = String(Math.floor(h)).padStart(2, '0');
+  const mm = String(Math.round((h % 1) * 60)).padStart(2, '0');
+  return `${hh}:${mm}`;
+}
 
 export function formatHours(h: number | null | undefined): string {
   if (h === null || h === undefined) {
@@ -55,7 +60,28 @@ export function formatHours(h: number | null | undefined): string {
   return `${h.toFixed(1)}h`;
 }
 
-export function getElapsedHours(startTime: number | null, config: BusinessHoursInput = {}): number {
+export function formatNumber(value: number | string | null | undefined): string | number {
+    if (value === null || value === undefined) return '-';
+    
+    let numVal;
+    if (typeof value === 'number') {
+        numVal = value;
+    } else if (typeof value === 'string') {
+        const parsed = Number(value.replace(/,/g, ''));
+        if (isNaN(parsed) || value.trim() === '') return value;
+        numVal = parsed;
+    } else {
+        return value;
+    }
+
+    // Format with dot as thousands separator and comma as decimal separator
+    // vi-VN locale naturally uses dot for thousands and comma for fractions
+    return new Intl.NumberFormat('vi-VN', {
+      maximumFractionDigits: 2,
+    }).format(numVal);
+}
+
+export function getElapsedHours (startTime: number | null, config: BusinessHoursInput = {}): number {
   if (!startTime) return 0;
   return calculateBusinessHours(startTime, Date.now(), config);
 }

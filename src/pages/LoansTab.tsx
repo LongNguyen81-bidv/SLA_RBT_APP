@@ -1,6 +1,7 @@
 import React from 'react';
 import LoanCardComp from '../components/LoanCardComp';
 import LoanDetailPanel from '../components/LoanDetailPanel';
+import { formatNumber } from '../utils/helpers';
 import type { Loan, StepProgress, SLAStep } from '../types';
 
 interface LoansTabProps {
@@ -26,7 +27,7 @@ export default function LoansTab({
       {/* Left: loan list */}
       <div>
         <div className="text-[11px] text-slate-600 font-mono font-semibold mb-3 tracking-wider">
-          HỒ SƠ ({loans.length})
+          HỒ SƠ ({formatNumber(loans.length)})
         </div>
         <div className="flex flex-col gap-2">
           {' '}
