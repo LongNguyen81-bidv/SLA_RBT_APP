@@ -204,9 +204,27 @@ export const usersApi = {
                 USERS.splice(index, 1);
             
 
+
             return {message: 'Xóa người dùng thành công'};
         }
         const response = await axios.delete(`${API_URL}/users/${id}`);
+        return response.data;
+    },
+
+    updateUser: async (id : string, userData : Partial < User >): Promise<{ message: string, user: User }> => {
+        if (USE_MOCK) {
+            await delay(500);
+            const index = USERS.findIndex(u => u.id === id);
+            if (index > -1) {
+                USERS[index] = {
+                    ...USERS[index],
+                    ...userData
+                };
+                return {message: 'Cập nhật người dùng thành công', user: USERS[index]};
+            }
+            throw new Error('User not found');
+        }
+        const response = await axios.put(`${API_URL}/users/${id}`, userData);
         return response.data;
     },
 

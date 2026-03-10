@@ -340,13 +340,8 @@ app.get('/api/users', async (req, res) => {
 
 // POST create a new user
 app.post('/api/users', async (req, res) => {
-    const {
-        username,
-        name,
-        role,
-        dept,
-        dept_code
-    } = req.body;
+    const {username, name, role, dept} = req.body;
+    const dept_code = req.body.dept_code || req.body.deptCode;
 
     try { // Kiểm tra username đã tồn tại chưa
         const [existing] = await db.query('SELECT username FROM users WHERE username = ?', [username]);
@@ -396,6 +391,45 @@ app.delete('/api/users/:id', async (req, res) => {
         }
         await db.query('DELETE FROM users WHERE id = ?', [id]);
         res.json({message: 'Xóa người dùng thành công'});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
+});
+
+// PUT update a user
+app.put('/api/users/:id', async (req, res) => {
+    const {id} = req.params;
+    const {name, role, dept} = req.body;
+    const dept_code = req.body.dept_code || req.body.deptCode;
+
+    try {
+        if (id === '1' && role !== 'ADMIN') {
+            return res.status(403).json({message: 'Không thể hạ quyền tài khoản Admin gốc'});
+        }
+
+        const [result] = await db.query('UPDATE users SET name = ?, role = ?, dept = ?, dept_code = ? WHERE id = ?', [
+            name,
+            role,
+            dept,
+            dept_code || null,
+            id
+        ]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({message: 'Không tìm thấy người dùng'});
+        }
+
+        res.json({
+            message: 'Cập nhật người dùng thành công',
+            user: {
+                id,
+                name,
+                role,
+                dept,
+                dept_code: dept_code || null
+            }
+        });
     } catch (err) {
         console.error(err);
         res.status(500).json({message: err.message});

@@ -31,6 +31,21 @@ export const useDeleteUser = () => {
     });
 };
 
+export const useUpdateUser = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (
+            {id, userData} : {
+                id: string,
+                userData: Partial < User >
+            }
+        ) => usersApi.updateUser(id, userData),
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ['users']});
+        }
+    });
+};
+
 export const useResetPassword = () => {
     return useMutation({
         mutationFn: (id : string) => usersApi.resetPassword(id)
