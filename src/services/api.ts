@@ -30,7 +30,7 @@ let currentLoans: Loan[] = [...MOCK_LOANS];
 let currentProgress: StepProgress[][] = JSON.parse(JSON.stringify(MOCK_PROGRESS));
 
 export const authApi = {
-    login: async (username : string, password : string): Promise<LoginResponse> => {
+    login: async (username : string, password : string): Promise < LoginResponse > => {
         if (USE_MOCK) {
             await delay(500);
             const user = USERS.find((u) => u.username === username && u.password === password);
@@ -46,7 +46,7 @@ export const authApi = {
 };
 
 export const loansApi = {
-    getLoans: async (currentUser : User | null): Promise<LoansData> => {
+    getLoans: async (currentUser : User | null): Promise < LoansData > => {
         if (USE_MOCK) {
             await delay(800);
 
@@ -85,7 +85,9 @@ export const loansApi = {
         return response.data;
     },
 
-    completeStep: async (loanId : string, stepId : number, actionType : 'FORWARD' | 'BACKWARD'): Promise<{ success: boolean }> => {
+    completeStep: async (loanId : string, stepId : number, actionType : 'FORWARD' | 'BACKWARD'): Promise < {
+        success: boolean
+    } > => {
         if (USE_MOCK) {
             await delay(600);
             const loanIndex = currentLoans.findIndex((l) => l.id === loanId);
@@ -141,7 +143,7 @@ export const loansApi = {
 };
 
 export const configApi = {
-    getSLAConfig: async (): Promise<SLAStep[]> => {
+    getSLAConfig: async (): Promise < SLAStep[] > => {
         if (USE_MOCK) {
             await delay(500);
             return SLA_STEPS;
@@ -152,27 +154,27 @@ export const configApi = {
 };
 
 export const staffApi = {
-    getStaffPerf: async (): Promise<StaffPerf[]> => {
+    getStaffPerf: async (): Promise < StaffPerf[] > => {
         if (USE_MOCK) {
             await delay(500);
             return STAFF_PERF;
         }
-        // Chưa implement endpoint lấy perf ở backend, ta return tạm mock array
-        // const response = await axios.get(`${API_URL}/staff/performance`);
-        // return response.data;
-        return STAFF_PERF;
+        const response = await axios.get(`${API_URL}/staff/performance`);
+        return response.data;
     }
 };
 
 export const testApi = {
-    seedData: async (): Promise<{message: string}> => {
+    seedData: async (): Promise < {
+        message: string
+    } > => {
         const response = await axios.post(`${API_URL}/test/seed`);
         return response.data;
     }
 };
 
 export const usersApi = {
-    getUsers: async (): Promise<User[]> => {
+    getUsers: async (): Promise < User[] > => {
         if (USE_MOCK) {
             await delay(500);
             return USERS;
@@ -181,7 +183,11 @@ export const usersApi = {
         return response.data;
     },
 
-    addUser: async (userData : Omit < User, 'id' | 'password' >): Promise<{ message: string, user: User, newPassword?: string }> => {
+    addUser: async (userData : Omit < User, 'id' | 'password' >): Promise < {
+        message: string,
+        user: User,
+        newPassword?: string
+    } > => {
         if (USE_MOCK) {
             await delay(500);
             const newUser: User = {
@@ -196,7 +202,9 @@ export const usersApi = {
         return response.data;
     },
 
-    deleteUser: async (id : string): Promise<{ message: string }> => {
+    deleteUser: async (id : string): Promise < {
+        message: string
+    } > => {
         if (USE_MOCK) {
             await delay(500);
             const index = USERS.findIndex(u => u.id === id);
@@ -211,7 +219,10 @@ export const usersApi = {
         return response.data;
     },
 
-    updateUser: async (id : string, userData : Partial < User >): Promise<{ message: string, user: User }> => {
+    updateUser: async (id : string, userData : Partial < User >): Promise < {
+        message: string,
+        user: User
+    } > => {
         if (USE_MOCK) {
             await delay(500);
             const index = USERS.findIndex(u => u.id === id);
@@ -228,7 +239,10 @@ export const usersApi = {
         return response.data;
     },
 
-    resetPassword: async (id : string): Promise<{ message: string, newPassword?: string }> => {
+    resetPassword: async (id : string): Promise < {
+        message: string,
+        newPassword?: string
+    } > => {
         if (USE_MOCK) {
             await delay(500);
             const user = USERS.find(u => u.id === id);

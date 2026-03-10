@@ -13,7 +13,7 @@ export interface User {
 
 export interface AuthContextType {
     user: User | null;
-    login: (username : string, password : string) => Promise<boolean>;
+    login: (username : string, password : string) => Promise < boolean >;
     logout: () => void;
     isLoading: boolean;
 }
@@ -61,12 +61,14 @@ export interface LoansData {
 
 // ===== Staff Performance =====
 export interface StaffPerf {
+    staffCode: string;
     name: string;
     role: string;
     loans: number;
     avgHours: number;
     exceeded: number;
     dept: string;
+    deptCode: string;
 }
 
 // ===== Config =====

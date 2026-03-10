@@ -455,6 +455,44 @@ app.post('/api/users/:id/reset-password', async (req, res) => {
     }
 });
 
+// 6. Staff Performance Endpoint
+app.get('/api/staff/performance', async (req, res) => {
+    try {
+        const [rows] = await db.query(`
+            SELECT 
+                u.username AS staffCode,
+                u.name,
+                u.role,
+                u.dept,
+                u.dept_code AS deptCode,
+                COUNT(DISTINCT lp.loan_id) AS loans,
+                ROUND(IFNULL(AVG(lp.actual_hours), 0), 1) AS avgHours,
+                IFNULL(SUM(CASE WHEN lp.actual_hours > ss.sla_hours THEN 1 ELSE 0 END), 0) AS exceeded
+            FROM users u
+            LEFT JOIN loan_progress lp ON u.name = lp.executed_by AND lp.completed = true
+            LEFT JOIN sla_steps ss ON lp.step_id = ss.id
+            GROUP BY u.id, u.name, u.role, u.dept, u.dept_code
+            ORDER BY u.id ASC
+        `);
+
+        const perfData = rows.map(r => ({
+            staffCode: r.staffCode,
+            name: r.name,
+            role: r.dept,
+            loans: Number(r.loans),
+            avgHours: Number(r.avgHours),
+            exceeded: Number(r.exceeded),
+            dept: r.dept,
+            deptCode: r.deptCode || ''
+        }));
+
+        res.json(perfData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Backend Server running on port ${PORT}`);
