@@ -13,7 +13,9 @@ import type {
     SLAStep,
     StaffPerf,
     LoginResponse,
-    LoansData
+    LoansData,
+    CreateLoanPayload,
+    LoanDocument
 }
 from '../types';
 
@@ -76,12 +78,41 @@ export const loansApi = {
             return {loans: filteredLoans, allProgress: filteredProgress};
         }
         const response = await axios.get(`${API_URL}/loans`, {
+            params: {
+                userId: currentUser ?. id,
+                userRole: currentUser ?. role
+            },
             headers: {
                 Authorization: `Bearer ${
                     localStorage.getItem('token')
                 }`
             }
         });
+        return response.data;
+    },
+
+    createLoan: async (payload : CreateLoanPayload, userId : string): Promise < {
+        message: string;
+        loan: Loan
+    } > => {
+        const response = await axios.post(`${API_URL}/loans`, {
+            ...payload,
+            userId
+        });
+        return response.data;
+    },
+
+    updateLoan: async (id : string, payload : Partial < CreateLoanPayload >): Promise < {
+        message: string
+    } > => {
+        const response = await axios.put(`${API_URL}/loans/${id}`, payload);
+        return response.data;
+    },
+
+    deleteLoan: async (id : string): Promise < {
+        message: string
+    } > => {
+        const response = await axios.delete(`${API_URL}/loans/${id}`);
         return response.data;
     },
 
@@ -255,5 +286,38 @@ export const usersApi = {
         }
         const response = await axios.post(`${API_URL}/users/${id}/reset-password`);
         return response.data;
+    }
+};
+
+export const documentsApi = {
+    upload: async (loanId : string, files : File[], userId : string): Promise < {
+        message: string;
+        documents: LoanDocument[]
+    } > => {
+        const formData = new FormData();
+        files.forEach(file => formData.append('files', file));
+        formData.append('userId', userId);
+        const response = await axios.post(`${API_URL}/loans/${loanId}/documents`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return response.data;
+    },
+
+    list: async (loanId : string): Promise < LoanDocument[] > => {
+        const response = await axios.get(`${API_URL}/loans/${loanId}/documents`);
+        return response.data;
+    },
+
+    delete: async (loanId : string, docId : number): Promise < {
+        message: string
+    } > => {
+        const response = await axios.delete(`${API_URL}/loans/${loanId}/documents/${docId}`);
+        return response.data;
+    },
+
+    getDownloadUrl: (loanId : string, docId : number): string => {
+        return `${API_URL}/loans/${loanId}/documents/${docId}/download`;
     }
 };

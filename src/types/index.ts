@@ -40,11 +40,12 @@ export interface Loan {
     customer: string;
     amount: string;
     type: string;
-    branch: string;
+    deptCode: string;
     officer: string;
     startTime: number;
     currentStepId: number | null;
     assignedDept: string;
+    createdBy?: string | null;
 }
 
 export interface StepProgress {
@@ -57,6 +58,24 @@ export interface StepProgress {
 export interface LoansData {
     loans: Loan[];
     allProgress: StepProgress[][];
+}
+
+// ===== Loan Documents =====
+export interface LoanDocument {
+    id: number;
+    loanId: string;
+    fileName: string;
+    filePath: string;
+    fileSize: number;
+    uploadedAt: number;
+    uploadedBy?: string;
+}
+
+export interface CreateLoanPayload {
+    customer: string;
+    deptCode: string;
+    type: string;
+    amount: number;
 }
 
 // ===== Staff Performance =====

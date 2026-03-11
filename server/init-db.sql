@@ -52,14 +52,28 @@ ON DUPLICATE KEY UPDATE name=name;
 CREATE TABLE IF NOT EXISTS loans (
     id VARCHAR(50) PRIMARY KEY,
     customer VARCHAR(255) NOT NULL,
-    branch VARCHAR(255) NOT NULL,
+    dept_code VARCHAR(20) DEFAULT NULL,
     type VARCHAR(100) NOT NULL,
     amount DECIMAL(15,2) NOT NULL,
     start_time BIGINT NOT NULL,
     officer VARCHAR(100) NOT NULL,
     current_step_id INT NOT NULL,
     assigned_dept VARCHAR(100) NOT NULL,
-    CONSTRAINT fk_loan_step FOREIGN KEY (current_step_id) REFERENCES sla_steps(id)
+    created_by VARCHAR(50) DEFAULT NULL,
+    CONSTRAINT fk_loan_step FOREIGN KEY (current_step_id) REFERENCES sla_steps(id),
+    CONSTRAINT fk_loan_creator FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- 3.5 Bảng Loan Documents (file đính kèm)
+CREATE TABLE IF NOT EXISTS loan_documents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    loan_id VARCHAR(50) NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    file_path VARCHAR(500) NOT NULL,
+    file_size INT DEFAULT 0,
+    uploaded_at BIGINT NOT NULL,
+    uploaded_by VARCHAR(50),
+    CONSTRAINT fk_doc_loan FOREIGN KEY (loan_id) REFERENCES loans(id) ON DELETE CASCADE
 );
 
 -- 4. Bảng Loan Progress

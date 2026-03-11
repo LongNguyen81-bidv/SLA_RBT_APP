@@ -111,7 +111,7 @@ export const MOCK_LOANS: Loan[] = [
         customer: 'Nguyễn Văn An',
         amount: '850 triệu',
         type: 'Mua nhà',
-        branch: 'CN Hà Nội',
+        deptCode: '001',
         officer: 'Trần Minh Khoa',
         startTime: Date.now() - 4 * 3600000,
         currentStepId: 2, // Đang ở định giá
@@ -121,7 +121,7 @@ export const MOCK_LOANS: Loan[] = [
         customer: 'Lê Thị Bình',
         amount: '1.2 tỷ',
         type: 'Kinh doanh BĐS',
-        branch: 'CN HCM',
+        deptCode: '002',
         officer: 'Trần Minh Khoa', // Cho QHKH
         startTime: Date.now() - 1 * 3600000,
         currentStepId: 1, // Đang ở QHKH
@@ -131,7 +131,7 @@ export const MOCK_LOANS: Loan[] = [
         customer: 'Công ty TNHH Minh Phát',
         amount: '3.5 tỷ',
         type: 'Mở rộng kinh doanh',
-        branch: 'CN Đà Nẵng',
+        deptCode: '003',
         officer: 'Ngô Thanh Hùng',
         startTime: Date.now() - 15 * 3600000,
         currentStepId: 4, // Đang ở Phê duyệt
@@ -141,7 +141,7 @@ export const MOCK_LOANS: Loan[] = [
         customer: 'Hoàng Văn Cường',
         amount: '500 triệu',
         type: 'Mua xe ô tô',
-        branch: 'CN Hà Nội',
+        deptCode: '001',
         officer: 'Trần Minh Khoa',
         startTime: Date.now() - 25 * 3600000,
         currentStepId: 5, // Đang ở HTTD
