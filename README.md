@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# SLA Retail Credit Tracker (SLA RBT App)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ứng dụng giám sát và quản lý tiến độ xử lý hồ sơ tín dụng bán lẻ tại các Chi nhánh theo cam kết chất lượng dịch vụ (SLA - Service Level Agreement).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Tính năng cốt lõi
 
-### `npm start`
+*   **Dashboard Tổng quan**: Theo dõi thời gian thực số lượng hồ sơ đang xử lý, hồ sơ vượt quá thời hạn SLA và năng suất xử lý trung bình.
+*   **Quy trình 10 bước chuẩn hóa**: Từ khâu tiếp nhận hồ sơ, định giá tài sản, thẩm định, phê duyệt cho tới giải ngân.
+*   **Cơ chế phân quyền tác nghiệp**: Bảo đảm chỉ có phòng ban phụ trách bước hiện tại mới có quyền Bàn giao hoặc Trả lại hồ sơ.
+*   **Tính toán giờ làm việc thông minh (Business Hours)**: Tự động loại trừ giờ nghỉ trưa, ngày nghỉ cuối tuần và ngày lễ đã thiết lập ra khỏi thời gian xử lý hồ sơ.
+*   **Hệ thống cấu hình cho Admin**: Quản lý tài khoản cán bộ, thống kê hiệu suất, cấu hình thời gian làm việc, danh sách ngày nghỉ lễ và hạn mức SLA của từng bước quy trình.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📘 Tài liệu Hướng dẫn sử dụng
 
-### `npm test`
+Vui lòng tham khảo tài liệu hướng dẫn sử dụng chi tiết bằng tiếng Việt tại đây:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+👉 **[Hướng dẫn sử dụng chi tiết (HDSD.md)](file:///c:/LongNguyen/vibeCode/sla-rbt-app/HDSD.md)**
 
-### `npm run build`
+Tài liệu hướng dẫn bao gồm:
+1. Hướng dẫn cài đặt và vận hành hệ thống (Frontend, Backend, Database).
+2. Danh sách các tài khoản demo tương ứng với từng phòng ban nghiệp vụ (`QHKH`, `Thẩm định`, `Định giá`, `Phê duyệt`, `HTTD`).
+3. Cách thức thao tác chuyển bước hồ sơ, đính kèm file tài liệu.
+4. Hướng dẫn cấu hình giờ làm việc, ngày nghỉ lễ và thời gian SLA định mức dành cho Quản trị viên (Admin).
+5. Cơ chế tính toán thời gian và phân loại các trạng thái SLA (Ok - xanh, Cảnh báo - cam, Vượt hạn - đỏ).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Công nghệ sử dụng
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend
+*   React 19 + TypeScript
+*   Tailwind CSS (Styling hiện đại, Responsive)
+*   TanStack Query (React Query)
+*   React Router DOM
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Backend & Database
+*   Node.js + Express
+*   MySQL Database (Trình kết nối `mysql2`)
+*   JWT (JSON Web Token) cho xác thực bảo mật
+*   Multer (Quản lý tải tệp tin đính kèm)
