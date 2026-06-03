@@ -2,6 +2,15 @@
 CREATE DATABASE IF NOT EXISTS sla_rbt DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE sla_rbt;
 
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS config;
+DROP TABLE IF EXISTS loan_progress;
+DROP TABLE IF EXISTS loan_documents;
+DROP TABLE IF EXISTS loans;
+DROP TABLE IF EXISTS sla_steps;
+DROP TABLE IF EXISTS users;
+SET FOREIGN_KEY_CHECKS = 1;
+
 -- 1. Bảng Users
 CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(50) PRIMARY KEY,
@@ -15,12 +24,12 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Dữ liệu mẫu (Users - Tương đương mockData)
 INSERT INTO users (id, username, password, role, dept, dept_code, name) VALUES
-('1', 'admin', '1', 'ADMIN', 'QLNB', '000', 'Trần Quản Trị'),
-('2', 'qhkh', '1', 'USER', 'QHKH', '001', 'Nguyễn Văn Quan Hệ'),
-('3', 'dinhgia', '1', 'USER', 'Định giá TS', '002', 'Lê Thị Định Giá'),
-('4', 'thamdinh', '1', 'USER', 'Thẩm định', '003', 'Phạm Thẩm Định'),
-('5', 'pheduyet', '1', 'USER', 'Phê duyệt', '004', 'Hoàng Phê Duyệt'),
-('6', 'httd', '1', 'USER', 'HTTD', '005', 'Vũ Hỗ Trợ')
+('1', 'admin', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'ADMIN', 'QLNB', '000', 'Trần Quản Trị'),
+('2', 'qhkh', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'USER', 'QHKH', '001', 'Nguyễn Văn Quan Hệ'),
+('3', 'dinhgia', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'USER', 'Định giá TS', '002', 'Lê Thị Định Giá'),
+('4', 'thamdinh', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'USER', 'Thẩm định', '003', 'Phạm Thẩm Định'),
+('5', 'pheduyet', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'USER', 'Phê duyệt', '004', 'Hoàng Phê Duyệt'),
+('6', 'httd', '$2b$10$dGF81FtgkNllHXSrNfGELOpFMB7n/ERyJIVoAO2tNAgqU5/0Swj5i', 'USER', 'HTTD', '005', 'Vũ Hỗ Trợ')
 ON DUPLICATE KEY UPDATE username=username;
 
 -- 2. Bảng SLA Steps Config

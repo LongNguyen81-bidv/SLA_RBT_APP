@@ -20,14 +20,10 @@ describe('MetricCard Component', () => {
   });
 
   it('applies the accent color to the side bar', () => {
-    const { container } = render(<MetricCard label="Accent Test" value={10} accent="#ff0000" />);
+    render(<MetricCard label="Accent Test" value={10} accent="#ff0000" />);
 
-    // Find the element that receives the accent color style
-    // Based on the code: <div className="absolute top-0 left-0..." style={{ background: accent }} />
-    const divs = container.querySelectorAll('div');
-    const accentDiv = Array.from(divs).find((div) =>
-      div.className.includes('absolute top-0 left-0')
-    );
+    // Find the element that receives the accent color style using testid
+    const accentDiv = screen.getByTestId('metric-accent');
 
     expect(accentDiv).toHaveStyle({ background: '#ff0000' });
   });

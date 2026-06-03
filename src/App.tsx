@@ -19,19 +19,22 @@ export default function App() {
   const { user } = useAuth();
   const [selectedLoan, setSelectedLoan] = useState(0);
 
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [, setCurrentTime] = useState(Date.now());
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(Date.now()), 60000);
     return () => clearInterval(interval);
   }, []);
 
   const { data: loansData, isLoading: isLoansLoading, isError: isLoansError } = useLoans(user);
-  const { data: SLA_STEPS, isLoading: isConfigLoading, isError: isConfigError } = useSLAConfig();
-  const { data: STAFF_PERF, isLoading: isStaffLoading, isError: isStaffError } = useStaffPerf();
+  const { data: SLA_STEPS, isLoading: isConfigLoading, isError: isConfigError } = useSLAConfig(!!user);
+  const { data: STAFF_PERF, isLoading: isStaffLoading, isError: isStaffError } = useStaffPerf(!!user && user.role === 'ADMIN');
 
-  const loans = loansData?.loans || [];
-  const allProgress = loansData?.allProgress || [];
-  const TOTAL_INTERNAL_HOURS = (SLA_STEPS || []).filter(s => s.internal).reduce((sum, s) => sum + s.slaHours, 0);
+  const loans = useMemo(() => loansData?.loans || [], [loansData]);
+  const allProgress = useMemo(() => loansData?.allProgress || [], [loansData]);
+  const TOTAL_INTERNAL_HOURS = useMemo(() => 
+    (SLA_STEPS || []).filter(s => s.internal).reduce((sum, s) => sum + s.slaHours, 0),
+    [SLA_STEPS]
+  );
 
   const totalExceeded = useMemo(
     () =>
@@ -76,7 +79,7 @@ export default function App() {
     );
   }
 
-  if (isError) {
+  if (isError && user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-100">
         <div className="bg-red-50 text-red-600 p-6 rounded-lg shadow-sm border border-red-200">

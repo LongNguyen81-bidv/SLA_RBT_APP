@@ -12,6 +12,7 @@ export default function MetricCard({ label, value, sub, accent }: MetricCardProp
   return (
     <div className="p-5 rounded-[10px] bg-white border border-[#C5DED9] relative overflow-hidden shadow-sm">
       <div
+        data-testid="metric-accent"
         className="absolute top-0 left-0 w-[3px] h-full rounded-l-[10px]"
         style={{ background: accent }}
       />

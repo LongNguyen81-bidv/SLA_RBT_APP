@@ -37,11 +37,16 @@ export default function StatusBadge({ status, label }: StatusBadgeProps) {
   const c = statusColors[status];
   return (
     <span
+      data-testid="status-badge"
       className={`${c.bg} border ${c.border} ${
         c.text
       } px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold tracking-wider inline-flex items-center gap-1.5`}
     >
-      <span className={`w-1.5 h-1.5 rounded-full ${c.dot} inline-block`} /> {label}{' '}
+      <span
+        data-testid="status-badge-dot"
+        className={`w-1.5 h-1.5 rounded-full ${c.dot} inline-block`}
+      />{' '}
+      {label}{' '}
     </span>
   );
 }

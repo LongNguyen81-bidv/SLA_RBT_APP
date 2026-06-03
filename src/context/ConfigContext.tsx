@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
 import type { BusinessConfig, Holiday, ConfigContextType, BusinessHoursCalcConfig } from '../types';
+import { useAuth } from './AuthContext';
+import { configApi } from '../services/api';
 
 const STORAGE_KEY = 'businessConfig';
 
@@ -73,7 +75,21 @@ interface ConfigProviderProps {
 }
 
 export function ConfigProvider({ children }: ConfigProviderProps) {
+  const { user } = useAuth();
   const [config, setConfigState] = useState<BusinessConfig>(loadConfig);
+
+  useEffect(() => {
+    if (user) {
+      configApi.getBusinessConfig()
+        .then((dbConfig) => {
+          setConfigState(dbConfig);
+          saveConfig(dbConfig);
+        })
+        .catch((err) => {
+          console.error('Lỗi khi tải cấu hình thời gian/lễ từ DB:', err);
+        });
+    }
+  }, [user]);
 
   const setConfig = useCallback(
     (updater: Partial<BusinessConfig> | ((prev: BusinessConfig) => BusinessConfig)) => {
@@ -86,6 +102,11 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
                 ...updater,
               };
         saveConfig(next);
+        if (localStorage.getItem('token')) {
+          configApi.saveBusinessConfig(next).catch((err) => {
+            console.error('Lỗi khi lưu cấu hình thời gian/lễ lên DB:', err);
+          });
+        }
         return next;
       });
     },

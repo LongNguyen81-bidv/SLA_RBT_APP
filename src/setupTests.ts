@@ -14,5 +14,9 @@ jest.mock('axios', () => ({
     create: jest.fn().mockReturnValue({
       interceptors: { request: { use: jest.fn() }, response: { use: jest.fn() } },
     }),
+    interceptors: {
+      request: { use: jest.fn() },
+      response: { use: jest.fn() },
+    },
   },
 }));

@@ -15,7 +15,8 @@ import type {
     LoginResponse,
     LoansData,
     CreateLoanPayload,
-    LoanDocument
+    LoanDocument,
+    BusinessConfig
 }
 from '../types';
 
@@ -23,6 +24,17 @@ from '../types';
 const API_URL = process.env.REACT_APP_API_URL || '/api';
 const USE_MOCK = false;
 // Đổi thành false khi có API endpoint thật
+
+// Configure Axios Interceptor to automatically attach JWT token
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 // Giả lập network delay
 const delay = (ms : number) : Promise < void > => new Promise((resolve) => setTimeout(resolve, ms));
@@ -81,11 +93,6 @@ export const loansApi = {
             params: {
                 userId: currentUser ?. id,
                 userRole: currentUser ?. role
-            },
-            headers: {
-                Authorization: `Bearer ${
-                    localStorage.getItem('token')
-                }`
             }
         });
         return response.data;
@@ -180,6 +187,14 @@ export const configApi = {
             return SLA_STEPS;
         }
         const response = await axios.get(`${API_URL}/sla-steps`);
+        return response.data;
+    },
+    getBusinessConfig: async (): Promise < BusinessConfig > => {
+        const response = await axios.get(`${API_URL}/config`);
+        return response.data;
+    },
+    saveBusinessConfig: async (config : BusinessConfig): Promise < { message: string } > => {
+        const response = await axios.put(`${API_URL}/config`, config);
         return response.data;
     }
 };

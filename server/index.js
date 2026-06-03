@@ -4,11 +4,43 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const db = require('./config/db');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'bidv_sla_rbt_secret_key';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// JWT Authentication Middleware
+function authenticateJWT(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, JWT_SECRET, (err, decoded) => {
+            if (err) {
+                return res.status(403).json({ message: 'Token không hợp lệ hoặc đã hết hạn' });
+            }
+            req.user = decoded;
+            next();
+        });
+    } else {
+        res.status(401).json({ message: 'Yêu cầu token xác thực' });
+    }
+}
+
+// Apply JWT authentication to all /api routes except auth/login and test/seed
+app.use((req, res, next) => {
+    if (req.path === '/api/auth/login' || req.path === '/api/test/seed') {
+        return next();
+    }
+    if (req.path.startsWith('/api')) {
+        return authenticateJWT(req, res, next);
+    }
+    next();
+});
 
 // ===== Multer config for file uploads =====
 const uploadDir = path.join(__dirname, 'uploads');
@@ -36,9 +68,22 @@ const upload = multer({
 app.post('/api/auth/login', async (req, res) => {
     const {username, password} = req.body;
     try {
-        const [rows] = await db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password]);
+        const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
         if (rows.length > 0) {
-            res.json({user: rows[0]});
+            const user = rows[0];
+            const isMatch = bcrypt.compareSync(password, user.password);
+            if (isMatch) {
+                const token = jwt.sign(
+                    { id: user.id, username: user.username, role: user.role, dept: user.dept },
+                    JWT_SECRET,
+                    { expiresIn: '24h' }
+                );
+                // Xoá trường password trước khi trả về client
+                delete user.password;
+                res.json({ token, user });
+            } else {
+                res.status(401).json({message: 'Sai tên đăng nhập hoặc mật khẩu'});
+            }
         } else {
             res.status(401).json({message: 'Sai tên đăng nhập hoặc mật khẩu'});
         }
@@ -74,6 +119,35 @@ app.get('/api/config', async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({message: err.message});
+    }
+});
+
+// PUT update Config Endpoint
+app.put('/api/config', async (req, res) => {
+    const { workDays, startHour, endHour, lunchBreakEnabled, lunchBreak, holidays } = req.body;
+    try {
+        const businessHours = {
+            workDays,
+            startHour,
+            endHour,
+            lunchBreakEnabled,
+            lunchBreak
+        };
+        
+        await db.query(
+            'INSERT INTO config (config_key, config_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE config_value = ?',
+            ['business_hours', JSON.stringify(businessHours), JSON.stringify(businessHours)]
+        );
+        
+        await db.query(
+            'INSERT INTO config (config_key, config_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE config_value = ?',
+            ['holidays', JSON.stringify(holidays || []), JSON.stringify(holidays || [])]
+        );
+        
+        res.json({ message: 'Cập nhật cấu hình thành công' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -592,13 +666,14 @@ app.post('/api/users', async (req, res) => {
 
         // Tạo password random 6 số
         const password = Math.floor(100000 + Math.random() * 900000).toString();
+        const hashedPassword = bcrypt.hashSync(password, 10);
         // Generate random ID (for mock simplicity, in real app use UUID)
         const id = 'U' + Date.now();
 
         await db.query('INSERT INTO users (id, username, password, role, dept, dept_code, name) VALUES (?, ?, ?, ?, ?, ?, ?)', [
             id,
             username,
-            password,
+            hashedPassword,
             role,
             dept,
             dept_code || null,
@@ -682,8 +757,9 @@ app.post('/api/users/:id/reset-password', async (req, res) => {
     const {id} = req.params;
     try { // Tạo password random 6 số
         const newPassword = Math.floor(100000 + Math.random() * 900000).toString();
+        const hashedPassword = bcrypt.hashSync(newPassword, 10);
 
-        const [result] = await db.query('UPDATE users SET password = ? WHERE id = ?', [newPassword, id]);
+        const [result] = await db.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({message: 'Không tìm thấy người dùng'});
